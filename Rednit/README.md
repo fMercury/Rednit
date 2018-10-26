@@ -1,6 +1,6 @@
-## Example
+## Rednit Dapp
 
-### Running example on dev environment (quick option)
+### Running rednit on dev environment (quick option)
 
 To install dependencies and build projects, run the following commands from the main project directory:
 
@@ -8,16 +8,16 @@ To install dependencies and build projects, run the following commands from the 
 yarn && yarn build
 ```
 
-To run example:
+To run rednit:
 
 ```sh
-cd universal-login-example
+cd rednit
 yarn dev:start
 ```
 
-### Running example on dev environment (manual option, deprecated, will be removed soon)
+### Running rednit on dev environment (manual option, deprecated, will be removed soon)
 
-Before running the example, first you must start a mock blockchain. From the `universal-login-relayer` directory run the following command:
+Before running the rednit, first you must start a mock blockchain. From the `universal-login-relayer` directory run the following command:
 
 ```sh
 yarn ganache:start
@@ -30,7 +30,7 @@ yarn ens:deploy
 yarn relayer:start
 ```
 
-then deploy contracts for the example application and run the application (from new console in the `universal-login-example` directory):
+then deploy contracts for the rednit application and run the application (from new console in the `rednit` directory):
 
 ```
 yarn contracts:deploy
