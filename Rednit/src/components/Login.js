@@ -62,7 +62,7 @@ class Login extends Component {
     return (
       <div className="login-view">
         <div className="container">
-          <img src={require('../img/rednit.jpg')} height="131px" width="400px"/>
+          <img src={require('../img/rednit.jpg')} height="158px" width="480px"/>
           <IdentitySelector
             onNextClick={(identity) => this.onNextClick(identity)}
             onChange={this.onChange.bind(this)}
