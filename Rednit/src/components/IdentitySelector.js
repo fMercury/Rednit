@@ -22,7 +22,6 @@ class IdentitySelector extends Component {
   render() {
     return (
       <div>
-        <h2> Type an username </h2>
         <div className="id-selector">
           <TextBox
             placeholder="bob.example.eth"

@@ -62,10 +62,10 @@ class Login extends Component {
     return (
       <div className="login-view">
         <div className="container">
-          <h1 className="main-title">Universal Logins</h1>
+          <img src={require('../img/rednit.jpg')} height="400px" width="400px"/>
+          <h1 className="main-title">Rednit</h1>
           <p className="login-view-text">
-            This is an example app for implementing ERC1077&1078 in Ethereum.
-            You can use this example to build your own app.
+          Find your soulmate(s)
           </p>
           <IdentitySelector
             onNextClick={(identity) => this.onNextClick(identity)}
