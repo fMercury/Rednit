@@ -30,13 +30,7 @@ class Account extends Component {
             identityService={this.props.identityService}
           />
           <hr className="separator" />
-          <ManageDevicesAccordion
-            emitter={this.props.identityService.emitter}
-          />
-          <hr className="separator" />
           <BackupCodeAccordionView setView={this.setView.bind(this)} />
-          <hr className="separator" />
-          <SettingsAccordion />
           <hr className="separator" />
         </div>
       </div>

@@ -18,6 +18,12 @@ class ContentContainer extends Component {
       view: 'Login',
       viewParameters: {}
     };
+    this.loadIdentity();
+  }
+
+  async loadIdentity() {
+    const {identityService} = this.props.services;
+    identityService.loadIdentity();
   }
 
   componentDidMount() {
