@@ -54,11 +54,11 @@ class ContentContainer extends Component {
     } else if (this.state.view === 'MainScreen') {
       return <MainScreen services={services}/>;
     } else if (this.state.view === 'Account') {
-      return (<Account identityService={services.identityService}/>);
+      return (<Account services={services} identityService={services.identityService}/>);
     } else if (this.state.view === 'ApproveConnection') {
       return <ApproveConnection services={services}/>;
     } else if (this.state.view === 'PendingAuthorizations') {
-      return <PendingAuthorizations services = {services} setView={this.setView.bind(this)}/>;
+      return <PendingAuthorizations services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Backup') {
       return <Backup services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Trusted') {

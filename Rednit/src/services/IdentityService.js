@@ -18,6 +18,10 @@ class IdentityService {
     }
   }
 
+  async logout() {
+    await this.storageService.clearStorage();
+  }
+
   async connect(label) {
     this.privateKey = await this.sdk.connect(
       this.identity.address,
