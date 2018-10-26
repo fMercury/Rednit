@@ -2,22 +2,21 @@ import React from 'react';
 import Collapsible from '../components/Collapsible';
 import PropTypes from 'prop-types';
 
-const BackupCodeAccordionView = (props) => (
+const EditProfileAccordionView = (props) => (
   <Collapsible
-    title="Backup Code"
+    title="Edit Profile"
   >
     <p className="advice-text">
-      If you lose all your devices you may not have other ways to recover your
-      account. Generate a recovery code and keep it safe
+        Edit the image and description of your profile.
     </p>
     <button onClick={() => props.setView('Backup')} className="btn fullwidth">
-      Generate new codes
+      Edit Profile
     </button>
   </Collapsible>
 );
 
-BackupCodeAccordionView.propTypes = {
+EditProfileAccordionView.propTypes = {
   setView: PropTypes.func
 };
 
-export default BackupCodeAccordionView;
+export default EditProfileAccordionView;

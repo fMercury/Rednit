@@ -4,6 +4,7 @@ import BackToAppBtn from './BackToAppBtn';
 import ProfileIdentity from './ProfileIdentity';
 import BackupCodeAccordionView from '../views/BackupCodeAccordionView';
 import LogoutAccordionView from '../views/LogoutAccordionView';
+import EditProfileAccordionView from '../views/EditProfileAccordionView';
 import SettingsAccordion from './SettingsAccordion';
 import PropTypes from 'prop-types';
 
@@ -36,6 +37,8 @@ class Account extends Component {
             type="identityAccount"
             identityService={this.props.identityService}
           />
+          <hr className="separator" />
+          <EditProfileAccordionView setView={this.setView.bind(this)} />
           <hr className="separator" />
           <BackupCodeAccordionView setView={this.setView.bind(this)} />
           <hr className="separator" />

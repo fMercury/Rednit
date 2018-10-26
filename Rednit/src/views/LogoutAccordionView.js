@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const LogoutAccordionView = (props) => (
   <Collapsible
     title="Logout"
-    subtitle="Back up your account"
   >
     <p className="advice-text">
       By logging out, you are removing this device from your identity.
