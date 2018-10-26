@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 class MainScreen extends Component {
   constructor(props) {
     super(props);
-    const {clickerService} = this.props.services;
-    this.clickerService = clickerService;
+    const {rednitTokenService} = this.props.services;
+    this.rednitTokenService = rednitTokenService;
     this.state = {lastClick: '0', lastPresser: 'nobody', events: []};
   }
 
@@ -20,7 +20,7 @@ class MainScreen extends Component {
   }
 
   async onClickerClick() {
-    await this.clickerService.click();
+    await this.rednitTokenService.register();
     this.setState({lastClick: '0'});
   }
 
@@ -35,21 +35,6 @@ class MainScreen extends Component {
   async update() {
     const {tokenService} = await this.props.services;
     const {identityService} = this.props.services;
-    const {address} = identityService.identity;
-    const balance = await tokenService.getBalance(address);
-    const clicksLeft = parseInt(balance, 10);
-    this.setState({clicksLeft});
-    const pressers = await this.clickerService.getPressEvents();
-    if (pressers.length > 0) {
-      this.setState({
-        lastClick: pressers[0].pressTime,
-        events: pressers});
-    } else {
-      this.setState({
-        lastClick: '0',
-        events: pressers});
-    }
-    setTimeout(this.update.bind(this), 1000);
   }
 
   render() {
