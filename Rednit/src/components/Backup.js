@@ -56,7 +56,7 @@ class Backup extends Component {
       identityService.identity.privateKey,
       addKeysPaymentOptions
     );
-    emitter.emit('setView', 'Greeting', {greetMode: 'backupKeys'});
+    emitter.emit('setView', 'MainScreen');
   }
 
   async cancelBackup() {
