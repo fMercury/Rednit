@@ -18,6 +18,10 @@ class IdentityService {
     }
   }
 
+  async storeIdentity(identity) {
+    this.storageService.storeIdentity(identity);
+  }
+
   async logout() {
     await this.storageService.clearStorage();
   }
@@ -44,10 +48,6 @@ class IdentityService {
         }
       }
     );
-  }
-
-  async storeIdentity(identity) {
-    this.storageService.storeIdentity(identity);
   }
 
   async recover() {

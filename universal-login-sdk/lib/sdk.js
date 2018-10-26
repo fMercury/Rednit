@@ -78,6 +78,20 @@ class EthereumIdentitySDK {
     return await this.execute(to, message, privateKey);
   }
 
+  async editProfile(to, profileHash, privateKey, transactionDetails) {
+    const {data} = new Interface(Identity.interface).functions.editProfile(profileHash);
+    const message = {
+      to,
+      from: to,
+      value: 0,
+      data,
+      gasToken: transactionDetails.gasToken,
+      gasPrice: transactionDetails.gasPrice,
+      gasLimit: transactionDetails.gasLimit
+    };
+    return await this.execute(to, message, privateKey);
+  }
+
   generatePrivateKey() {
     return ethers.Wallet.createRandom().privateKey;
   }
@@ -166,6 +180,24 @@ class EthereumIdentitySDK {
 
   async fetchPendingAuthorisations(identityAddress) {
     return this.relayerObserver.fetchPendingAuthorisations(identityAddress);
+  }
+
+  async getProfileEdit(userAddress) {
+    const profileEditEvent = new Interface(Identity.interface).events.ProfileEdit;
+    var profileEdit;
+    const filter = {
+      fromBlock: 0,
+      address: userAddress,
+      topics: [profileEditEvent.topics]
+    };
+    const events = await this.provider.getLogs(filter);
+    for (const event of events) {
+      const eventArguments = profileEditEvent.parse(profileEditEvent.topics, event.data);
+      if (eventArguments.customer === userAddress) {
+        profileEdit = eventArguments.profileHash;
+      }
+    }
+    return profileEdit;
   }
 
   subscribe(eventType, identityAddress, callback) {
