@@ -9,6 +9,7 @@ import PendingAuthorizations from './PendingAuthorizations';
 import Backup from './Backup';
 import Trusted from './Trusted';
 import RecoverAccount from './RecoverAccount';
+import EditProfile from './EditProfile';
 import PropTypes from 'prop-types';
 
 class ContentContainer extends Component {
@@ -65,6 +66,8 @@ class ContentContainer extends Component {
       return <Trusted setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'RecoverAccount') {
       return <RecoverAccount services={services} setView={this.setView.bind(this)}/>;
+    } else if (this.state.view === 'EditProfile') {
+      return <EditProfile services={services} setView={this.setView.bind(this)}/>;
     }
   }
 }

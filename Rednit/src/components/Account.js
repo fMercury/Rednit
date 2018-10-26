@@ -12,7 +12,6 @@ class Account extends Component {
   constructor(props) {
     super(props);
     this.emitter = this.props.services.emitter;
-    console.log(props)
   }
 
   setView(view) {
