@@ -12,8 +12,7 @@
     "universal-login-contracts",
     "universal-login-relayer",
     "universal-login-sdk",
-    "universal-login-example",
-    "universal-login-boilerplate"
+    "Rednit"
   ],
   "dependencies": {
     "wsrun": "^2.2.1"

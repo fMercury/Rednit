@@ -19,6 +19,12 @@ yarn-error.log
 /universal-login-example/.cache
 /universal-login-example/node_modules
 /universal-login-example/yarn-error.log
+/Rednit/.env
+/Rednit/dist
+/Rednit/build
+/Rednit/.cache
+/Rednit/node_modules
+/Rednit/yarn-error.log
 /universal-login-boilerplate/.env
 /universal-login-boilerplate/dist
 /universal-login-boilerplate/build
