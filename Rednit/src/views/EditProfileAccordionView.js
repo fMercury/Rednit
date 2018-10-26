@@ -9,7 +9,7 @@ const EditProfileAccordionView = (props) => (
     <p className="advice-text">
         Edit the image and description of your profile.
     </p>
-    <button onClick={() => props.setView('Backup')} className="btn fullwidth">
+    <button onClick={() => props.setView('EditProfile')} className="btn fullwidth">
       Edit Profile
     </button>
   </Collapsible>
