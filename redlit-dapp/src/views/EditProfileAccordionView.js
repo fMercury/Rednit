@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const EditProfileAccordionView = (props) => (
   <Collapsible
-    title="Edit Profile"
+    title="Profile"
   >
     <p className="advice-text">
         Edit the image and description of your profile.
