@@ -19,7 +19,13 @@ class MainScreenView extends Component {
   render() {
     return (
       <div className="main-screen">
+
         <div className="container text-center">
+        <div className="row">
+          <div className="col-4 text-center"> 1 </div>
+          <div className="col-4 text-center"> 2 </div>
+          <div className="col-4 text-center"> 3 </div>
+        </div>
           <p>
             You have{' '}
             <span className="bold">

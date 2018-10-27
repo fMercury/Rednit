@@ -20,20 +20,82 @@ class LitTokenService {
     return await this.litTokenContract.balances(address);
   };
 
-  async sendToRelation(address) {
-    return await this.litTokenContract.balance(address);
+  async sendToRelation(address, tokens) {
+    const {data} = new Interface(LitToken.interface).functions.sendToRelation(address, tokens);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
-  async withdrawFromRelation(address) {
-    return await this.litTokenContract.balance(address);
+  async withdrawFromRelation(address, tokens) {
+    const {data} = new Interface(LitToken.interface).functions.withdrawFromRelation(address, tokens);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
-  async sendRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async sendRelationRequest(to, tokens) {
+    const {data} = new Interface(LitToken.interface).functions.submitRequest(to, tokens);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
-  async acceptRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async cancelRequestReceiver(to) {
+    const {data} = new Interface(LitToken.interface).functions.cancelRequestReceiver(to);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
+  }
+
+  async cancelRequestSender(from) {
+    const {data} = new Interface(LitToken.interface).functions.cancelRequestSender(from);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
+  }
+
+  async acceptRequest(to, tokens) {
+    const {data} = new Interface(LitToken.interface).functions.acceptRelationRequest(to, tokens);
+    const message = {
+      to: this.litTokenAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
   async register() {
@@ -48,6 +110,7 @@ class LitTokenService {
     }
     await this.identityService.execute(message);
   }
+
 }
 
 export default LitTokenService;

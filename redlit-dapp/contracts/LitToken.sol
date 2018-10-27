@@ -33,7 +33,7 @@ contract LitToken is StandardToken {
     request[msg.sender][to] = tokens;
   }
 
-  function cancelRequestReceiver(address from, uint256 request_index) public {
+  function cancelRequestReceiver(address from) public {
     require(request[from][msg.sender] > 0);
     _transfer(address(0), from, request[from][msg.sender]);
   }
