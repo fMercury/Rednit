@@ -9,7 +9,10 @@ contract LitToken is StandardToken {
   string public constant symbol = "LIT";
   uint8 public constant decimals = 18;
 
+  mapping (address => bool) public registeredUsers;
+
   event ProfileEdit(address user, string profileHash);
+  event RegisterUser(address user);
 
   struct Request {
     address addr;
@@ -30,8 +33,11 @@ contract LitToken is StandardToken {
   }
 
   function register() public {
+    require(!registeredUsers[msg.sender]);
+    registeredUsers[msg.sender] = true;
     balances[msg.sender] = MAX_BALANCE;
     emit Transfer(0x0, msg.sender, MAX_BALANCE);
+    emit RegisterUser(msg.sender);
   }
 
   function submitRequest(address to, uint256 tokens) public {

@@ -12,6 +12,7 @@ class Login extends Component {
     this.state = {
       identity: ''
     };
+    this.litTokenService = this.props.services.litTokenService;
     this.identityService = this.props.services.identityService;
     this.sdk = this.props.services.sdk;
   }
@@ -43,6 +44,7 @@ class Login extends Component {
     } else {
       emitter.emit('setView', 'CreatingID');
       await this.identityService.createIdentity(identity);
+      await this.litTokenService.register();
       emitter.emit('setView', 'MainScreen');
     }
   }
