@@ -28,6 +28,10 @@ class EditProfile extends Component {
     this.setState({file: URL.createObjectURL(event.target.files[0])});
   }
 
+  editDescription(text) {
+
+  }
+
   sendToIdentityService(event) {
     event.preventDefault();
     const {file} = this.state;
@@ -38,8 +42,13 @@ class EditProfile extends Component {
     const {file} = this.state;
     return (
       <div>
-        <EditProfileView setView={this.setView.bind(this)} sendToIdentityService={this.sendToIdentityService.bind(this)} handleFileUpload={this.handleFileUpload.bind(this)}/>
-        { file ? <img src={file} /> : null }
+        <EditProfileView 
+          setView={this.setView.bind(this)} 
+          sendToIdentityService={this.sendToIdentityService.bind(this)} 
+          handleFileUpload={this.handleFileUpload.bind(this)}
+          identity={this.identityService.identity.name}
+          description="Howdy Do Test Description!"
+        />
 
       </div>
     );

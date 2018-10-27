@@ -22,7 +22,6 @@ class Account extends Component {
   }
 
   async logout() {
-    //this.props.identityService.removeKey()
     this.props.identityService.logout();
     this.emitter.emit('setView', 'Login');
   }
