@@ -9,10 +9,10 @@
     "chalk": "^2.0.1"
   },
   "workspaces": [
-    "universal-login-contracts",
-    "universal-login-relayer",
+    "redlit-contracts",
+    "relayer",
     "universal-login-sdk",
-    "Rednit"
+    "redlit-dapp"
   ],
   "dependencies": {
     "wsrun": "^2.2.1"
