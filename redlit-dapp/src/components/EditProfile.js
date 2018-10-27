@@ -12,10 +12,11 @@ class EditProfile extends Component {
     this.state = {
       file: this.litTokenService.getUserProfile()
     };
+    this.doStuff();
   }
 
-  componentDidMount() {
-
+  async doStuff() {
+    console.log(await this.litTokenService.getRegisteredUsers());
   }
 
   setView(view) {

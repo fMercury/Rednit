@@ -69,15 +69,15 @@ class MainScreenView extends Component {
         <div className="container text-center">
           <div className="row">
             <div className="col-4 text-center">
-              <button onClick={this.props.rejectProfile}>
-                <i className="fas fa-1x fa-user"></i>
+              <button onClick={this.props.goToProfile}>
+                <i class="fas fa-1x fa-user"></i>
               </button>
             </div>
             <div className="col-4 text-center">
               <img src={require('../img/redlit.jpg')} height="25px" width="70px"/>
             </div>
             <div className="col-4 text-center">
-              <button onClick={this.props.rejectProfile}>
+              <button onClick={this.props.goToRelations}>
                 <i class="fas fa-1x fa-comments"></i>
               </button>
             </div>
@@ -136,7 +136,8 @@ MainScreenView.propTypes = {
   clicksLeft: PropTypes.number,
   lastClick: PropTypes.string,
   onClickerClick: PropTypes.func,
-  events: PropTypes.array
+  events: PropTypes.array,
+  goToProfile: PropTypes.func
 };
 
 export default MainScreenView;

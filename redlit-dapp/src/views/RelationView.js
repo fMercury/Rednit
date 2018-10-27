@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 const RelationView  = (props) => (
       <div className="subview">
         <div className="container">
-          <h1 className="main-title">Profile</h1>
+          <h1 className="main-title">Matches</h1>
           <p className="relation-text">
-            Your Relation!!
+            Your Matches!!
           </p>
 
         </div>
 
       <div className="text-center">
-        <button onClick={() => props.setView('Account')} className="secondary-btn">
+        <button onClick={() => props.setView('MainScreen')} className="secondary-btn">
           Back
         </button>
       </div>

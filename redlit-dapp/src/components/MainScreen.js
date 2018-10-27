@@ -32,6 +32,14 @@ class MainScreen extends Component {
     clearTimeout(this.timeout);
   }
 
+  goToProfile(){
+    this.setView("Account");
+  }
+
+  goToRelations(){
+    this.setView("Relation");
+  }
+
   async update() {
     const {tokenService} = await this.props.services;
     const {identityService} = this.props.services;
@@ -45,14 +53,7 @@ class MainScreen extends Component {
   render() {
     return (
       <div>
-        <HeaderView>
-          <ProfileIdentity
-            type="identityHeader"
-            identityService={this.props.services.identityService}/>
-          <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-          <AccountLink setView={this.setView.bind(this)} />
-        </HeaderView>
-        <MainScreenView clicksLeft={this.state.clicksLeft} events={this.state.events} onClickerClick={this.onClickerClick.bind(this)} lastClick={this.state.lastClick} />
+        <MainScreenView goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} clicksLeft={this.state.clicksLeft} events={this.state.events} onClickerClick={this.onClickerClick.bind(this)} lastClick={this.state.lastClick} />
       </div>
     );
   }

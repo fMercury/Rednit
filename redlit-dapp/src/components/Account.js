@@ -35,22 +35,10 @@ class Account extends Component {
         </HeaderView>
 
         <div className="container">
-          <ProfileIdentity
-            type="identityAccount"
-            identityService={this.props.identityService}
-          />
-          <hr className="separator" />
-          <ProfileAccordionView setView={this.setView.bind(this)} />
-            
-          <hr className="separator" />
           <EditProfileAccordionView setView={this.setView.bind(this)} />
-          <hr className="separator" />
-          <BackupCodeAccordionView setView={this.setView.bind(this)} />
 
           <hr className="separator" />
-          <RelationAccordionView setView={this.setView.bind(this)} />
-          <hr className="separator" />
-          <SwapAccordionView setView={this.setView.bind(this)} />
+          <BackupCodeAccordionView setView={this.setView.bind(this)} />
 
           <hr className="separator" />
           <LogoutAccordionView logout={this.logout.bind(this)} />

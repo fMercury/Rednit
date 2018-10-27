@@ -103,5 +103,21 @@ class LitTokenService {
     }
     return profileEdit;
   }
+
+  async getRegisteredUsers() {
+    const registerUserEvent = new Interface(LitToken.interface).events.RegisterUser;
+    var registeredUsers = [];
+    const filter = {
+      fromBlock: 0,
+      address: this.litTokenContractAddress,
+      topics: [registerUserEvent.topics]
+    };
+    const events = await this.provider.getLogs(filter);
+    for (const event of events) {
+      const eventArguments = registerUserEvent.parse(registerUserEvent.topics, event.data);
+      registeredUsers.push(eventArguments.user);
+    }
+    return registeredUsers;
+  }
 }
 export default LitTokenService;
