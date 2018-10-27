@@ -78,7 +78,6 @@ class ContentContainer extends Component {
       return <Relation services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Swap') {
       return <Swap services={services} setView={this.setView.bind(this)}/>;
-
     }
   }
 }

@@ -41,6 +41,7 @@ class Account extends Component {
           />
           <hr className="separator" />
           <ProfileAccordionView setView={this.setView.bind(this)} />
+            
           <hr className="separator" />
           <EditProfileAccordionView setView={this.setView.bind(this)} />
           <hr className="separator" />

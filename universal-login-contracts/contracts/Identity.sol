@@ -17,7 +17,7 @@ contract Identity is ENSRegistered, SignedApprovalScheme {
     }
     
     function editProfile(bytes32 _profileHash) public {
-        //TODO: Implement require(keys[bytes32(msg.sender)].key);
+        require(keys[bytes32(msg.sender)].key != 0x0);
         emit ProfileEdit(_profileHash);
     }
 }
