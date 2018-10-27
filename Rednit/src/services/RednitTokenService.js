@@ -12,7 +12,7 @@ class RednitTokenService {
   }
 
   async getBalance(address) {
-    return await this.rednitTokenContract.balanceOf(address);
+    return await this.rednitTokenContract.balance(address);
   }
 
   async register() {
