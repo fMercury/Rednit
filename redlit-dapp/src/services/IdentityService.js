@@ -1,15 +1,19 @@
 import ethers, {Wallet} from 'ethers';
 import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
+import SwarmAPI from 'swarm-api';
+import image2base64 from 'image-to-base64';
 
 class IdentityService {
-  constructor(sdk, emitter, storageService, provider) {
+  constructor(sdk, emitter, storageService, provider, swarmProvider) {
     this.sdk = sdk;
     this.emitter = emitter;
     this.identity = {};
     this.deviceAddress = '';
     this.provider = provider;
     this.storageService = storageService;
-
+    this.swarmProvider = swarmProvider;
+    // this.swarm = Swarm.at(this.swarmProvider);
+    this.swarm = new SwarmAPI({ gateway: this.swarmProvider });
   }
 
   async loadIdentity() {
@@ -24,11 +28,26 @@ class IdentityService {
     this.storageService.storeIdentity(identity);
   }
 
-  async editProfile(profileInformation) {
-    const profileHash = '';
-    // Upload profile information to swarm
-    // profileHash = swarm upload;
-    this.sdk.editProfile(this.identity.address, profileHash, this.identity.privateKey, DEFAULT_PAYMENT_OPTIONS);
+  async getUserProfile(address=this.identity.address) {
+    return this.sdk.getProfileEdit(address);
+  }
+
+  async editProfile(file) {
+    const base64File = await image2base64(file);
+    let profileHash = '';
+    this.swarm.uploadRaw(base64File, async (err, swarmImageHash) => {
+      if(err) return console.error('Error uploading contents', err);
+      let userProfile = this.getUserProfile();
+      userProfile.image = swarmImageHash;
+      this.swarm.uploadRaw(userProfile, async (err, profileHash) => {
+        console.log('calling with');
+        console.log('this.identity.address', this.identity.address);
+        console.log('profileHash', profileHash);
+        console.log('this.identity.privateKey', this.identity.privateKey);
+        console.log('DEFAULT_PAYMENT_OPTIONS', DEFAULT_PAYMENT_OPTIONS);
+        await this.sdk.editProfile(this.identity.address, profileHash, this.identity.privateKey, DEFAULT_PAYMENT_OPTIONS);
+      });
+    });
   }
 
   async logout() {
