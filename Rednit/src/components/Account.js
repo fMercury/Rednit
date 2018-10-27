@@ -5,6 +5,7 @@ import ProfileIdentity from './ProfileIdentity';
 import BackupCodeAccordionView from '../views/BackupCodeAccordionView';
 import LogoutAccordionView from '../views/LogoutAccordionView';
 import EditProfileAccordionView from '../views/EditProfileAccordionView';
+import ProfileAccordionView from '../views/ProfileAccordionView';
 import SettingsAccordion from './SettingsAccordion';
 import PropTypes from 'prop-types';
 
@@ -36,6 +37,9 @@ class Account extends Component {
             type="identityAccount"
             identityService={this.props.identityService}
           />
+          <hr className="separator" />
+          <ProfileAccordionView setView={this.setView.bind(this)} />
+
           <hr className="separator" />
           <EditProfileAccordionView setView={this.setView.bind(this)} />
           <hr className="separator" />
