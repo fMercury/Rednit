@@ -79,7 +79,6 @@ class EthereumIdentitySDK {
   }
 
   async editProfile(to, profileHash, privateKey, transactionDetails) {
-    console.log('editPRofile');
     const {data} = new Interface(Identity.interface).functions.editProfile(profileHash);
     const message = {
       to,

@@ -27,7 +27,7 @@ class Services {
     this.clickerService = new ClickerService(this.identityService, clickerContractAddress, this.provider, this.ensService);
     this.authorisationService = new AuthorisationService(this.sdk, this.emitter);
     this.identitySelectionService = new IdentitySelectionService(this.sdk, config.ensDomains);
-    this.rednitTokenService = new LitTokenService(litTokenAddress, this.identityService, this.ensService, this.provider)
+    this.litTokenService = new LitTokenService(rednitTokenContractAddress, this.identityService, this.ensService, this.provider, this.config.swarmProvider)
     this.greetingService = new GreetingService(this.provider);
   }
 

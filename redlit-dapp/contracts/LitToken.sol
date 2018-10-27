@@ -9,6 +9,8 @@ contract LitToken is StandardToken {
   string public constant symbol = "LIT";
   uint8 public constant decimals = 18;
 
+  event ProfileEdit(address user, string profileHash);
+
   struct Request {
     address addr;
     uint256 tokens;
@@ -22,6 +24,10 @@ contract LitToken is StandardToken {
 
   // Maximun token balance of a user
   uint256 public constant MAX_BALANCE = 100 * (10 ** uint256(decimals));
+
+  function editProfile(string _profileHash) public {
+      emit ProfileEdit(msg.sender, _profileHash);
+  }
 
   function register() public {
     balances[msg.sender] = MAX_BALANCE;
