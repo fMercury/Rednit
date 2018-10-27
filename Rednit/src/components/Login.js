@@ -43,6 +43,7 @@ class Login extends Component {
     } else {
       emitter.emit('setView', 'CreatingID');
       await this.identityService.createIdentity(identity);
+      await this.identityService.editProfile('Hello');
       emitter.emit('setView', 'MainScreen');
     }
   }

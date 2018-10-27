@@ -1,4 +1,5 @@
 import ethers, {Wallet} from 'ethers';
+import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
 
 class IdentityService {
   constructor(sdk, emitter, storageService, provider) {
@@ -8,6 +9,7 @@ class IdentityService {
     this.deviceAddress = '';
     this.provider = provider;
     this.storageService = storageService;
+
   }
 
   async loadIdentity() {
@@ -20,6 +22,13 @@ class IdentityService {
 
   async storeIdentity(identity) {
     this.storageService.storeIdentity(identity);
+  }
+
+  async editProfile(profileInformation) {
+    const profileHash = '';
+    // Upload profile information to swarm
+    // profileHash = swarm upload;
+    this.sdk.editProfile(this.identity.address, profileHash, this.identity.privateKey, DEFAULT_PAYMENT_OPTIONS);
   }
 
   async logout() {
