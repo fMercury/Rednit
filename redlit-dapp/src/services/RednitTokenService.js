@@ -2,44 +2,44 @@ import ethers, {utils, Interface} from 'ethers';
 import Token from '../../build/Token';
 import {tokenContractAddress} from '../../config/config';
 import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
-import RednitToken from '../../build/RednitToken';
+import LitToken from '../../build/LitToken';
 
-class RednitTokenService {
-  constructor(rednitTokenContractAddress, identityService, ensService, provider) {
-    this.rednitTokenContractAddress = rednitTokenContractAddress;
+class LitTokenService {
+  constructor(litTokenContractAddress, identityService, ensService, provider) {
+    this.litTokenContractAddress = litTokenContractAddress;
     this.identityService = identityService;
     this.provider = provider;
   }
 
   async getBalance(address) {
-    this.rednitTokenContract = new ethers.Contract(
-      this.rednitTokenContractAddress,
-      RednitToken.interface,
+    this.litTokenContract = new ethers.Contract(
+      this.litTokenContractAddress,
+      LitToken.interface,
       this.provider
     );
-    return await this.rednitTokenContract.balances(address);
+    return await this.litTokenContract.balances(address);
   };
 
   async sendToRelation(address) {
-    return await this.rednitTokenContract.balance(address);
+    return await this.litTokenContract.balance(address);
   }
 
   async withdrawFromRelation(address) {
-    return await this.rednitTokenContract.balance(address);
+    return await this.litTokenContract.balance(address);
   }
 
   async sendRelationRequest(address) {
-    return await this.rednitTokenContract.balance(address);
+    return await this.litTokenContract.balance(address);
   }
 
   async acceptRelationRequest(address) {
-    return await this.rednitTokenContract.balance(address);
+    return await this.litTokenContract.balance(address);
   }
 
   async register() {
-    const {data} = new Interface(RednitToken.interface).functions.register();
+    const {data} = new Interface(LitToken.interface).functions.register();
     const message = {
-      to: this.rednitTokenContractAddress,
+      to: this.litTokenContractAddress,
       from: this.identityService.identity.address,
       value: 0,
       data,
@@ -50,4 +50,4 @@ class RednitTokenService {
   }
 }
 
-export default RednitTokenService;
+export default LitTokenService;

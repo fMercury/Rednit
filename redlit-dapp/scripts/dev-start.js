@@ -6,7 +6,7 @@ import {ENSDeployer} from 'universal-login-relayer';
 import Clicker from '../build/Clicker';
 import Token from '../build/Token';
 import RelationChannel from '../build/RelationChannel';
-import RednitToken from '../build/RednitToken';
+import LitToken from '../build/LitToken';
 import {promisify} from 'util';
 import TokenGrantingRelayer from '../src/TokenGrantingRelayer';
 
@@ -104,10 +104,10 @@ class Deployer {
     this.env.TOKEN_CONTRACT_ADDRESS = this.tokenContract.address;
   }
 
-  async deployRednitTokenContract() {
-    this.rednitTokenContract = await deployContract(this.deployer, RednitToken);
-    console.log(`RednitToken contract address: ${this.rednitTokenContract.address}`);
-    this.env.REDNIT_TOKEN_CONTRACT_ADDRESS = this.rednitTokenContract.address;
+  async deployLitTokenContract() {
+    this.litTokenContract = await deployContract(this.deployer, LitToken);
+    console.log(`LitToken contract address: ${this.litTokenContract.address}`);
+    this.env.REDNIT_TOKEN_CONTRACT_ADDRESS = this.litTokenContract.address;
   }
 
   async deployClickerContract() {
@@ -146,8 +146,8 @@ class Deployer {
     await this.startRelayer();
     console.log('Deploying clicker contract...');
     await this.deployClickerContract();
-    console.log('Deploying RednitToken contract...');
-    await this.deployRednitTokenContract();
+    console.log('Deploying LitToken contract...');
+    await this.deployLitTokenContract();
     console.log('Preparing relayer...');
     await this.relayer.addHooks();
     console.log('Starting example app web server...');
