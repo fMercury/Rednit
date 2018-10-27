@@ -48,6 +48,7 @@ class EditProfile extends Component {
           handleFileUpload={this.handleFileUpload.bind(this)}
           identity={this.identityService.identity.name}
           description="Howdy Do Test Description!"
+          name="Francisco Testname"
         />
 
       </div>
