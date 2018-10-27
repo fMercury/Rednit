@@ -6,11 +6,11 @@ class EditProfile extends Component {
     super(props);
     this.emitter = this.props.services.emitter;
     this.identityService = this.props.services.identityService;
-    this.rednitTokenService = this.props.services.rednitTokenService;
+    this.litTokenService = this.props.services.litTokenService;
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.sendToIdentityService = this.sendToIdentityService.bind(this);
     this.state = {
-      file: this.rednitTokenService.getUserProfile()
+      file: this.litTokenService.getUserProfile()
     };
   }
 
@@ -30,7 +30,7 @@ class EditProfile extends Component {
   sendToIdentityService(event) {
     event.preventDefault();
     const {file} = this.state;
-    this.rednitTokenService.editProfile(file);
+    this.litTokenService.editProfile(file);
   }
 
   render() {
