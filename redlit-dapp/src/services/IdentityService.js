@@ -40,7 +40,12 @@ class IdentityService {
       let userProfile = this.getUserProfile();
       userProfile.image = swarmImageHash;
       this.swarm.uploadRaw(userProfile, async (err, profileHash) => {
-        this.sdk.editProfile(this.identity.address, profileHash, this.identity.privateKey, DEFAULT_PAYMENT_OPTIONS);
+        console.log('calling with');
+        console.log('this.identity.address', this.identity.address);
+        console.log('profileHash', profileHash);
+        console.log('this.identity.privateKey', this.identity.privateKey);
+        console.log('DEFAULT_PAYMENT_OPTIONS', DEFAULT_PAYMENT_OPTIONS);
+        await this.sdk.editProfile(this.identity.address, profileHash, this.identity.privateKey, DEFAULT_PAYMENT_OPTIONS);
       });
     });
   }
