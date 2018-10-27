@@ -19,10 +19,6 @@ class MainScreen extends Component {
     emitter.emit('setView', view);
   }
 
-  async onClickerClick() {
-    await this.rednitTokenService.register();
-    this.setState({lastClick: '0'});
-  }
 
   componentDidMount() {
     this.timeout = setTimeout(this.update.bind(this), 0);
@@ -53,7 +49,8 @@ class MainScreen extends Component {
   render() {
     return (
       <div>
-        <MainScreenView goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} clicksLeft={this.state.clicksLeft} events={this.state.events} onClickerClick={this.onClickerClick.bind(this)} lastClick={this.state.lastClick} />
+        <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
+        <MainScreenView goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
       </div>
     );
   }

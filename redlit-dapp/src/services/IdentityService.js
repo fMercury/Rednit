@@ -71,7 +71,7 @@ class IdentityService {
             privateKey: this.privateKey,
             address: this.identity.address
           };
-          this.emitter.emit('setView', 'Greeting', {greetMode: 'addKey'});
+          this.emitter.emit('setView', 'MainScreen');
           this.storeIdentity(this.identdity);
         }
       }
@@ -93,7 +93,7 @@ class IdentityService {
             privateKey: this.privateKey,
             address: this.identity.address
           };
-          this.emitter.emit('setView', 'Greeting');
+          this.emitter.emit('setView', 'MainScreen');
           this.storeIdentity(this.identdity);
         }
       }

@@ -11,11 +11,6 @@ const RelationView  = (props) => (
 
         </div>
 
-      <div className="text-center">
-        <button onClick={() => props.setView('MainScreen')} className="secondary-btn">
-          Back
-        </button>
-      </div>
     </div>
 );
 

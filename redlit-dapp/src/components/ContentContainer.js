@@ -10,7 +10,6 @@ import Backup from './Backup';
 import Trusted from './Trusted';
 import RecoverAccount from './RecoverAccount';
 import EditProfile from './EditProfile';
-import Profile from './Profile';
 import Relation from './Relation';
 import Swap from './Swap';
 import PropTypes from 'prop-types';
