@@ -7,16 +7,11 @@ class EditProfile extends Component {
     this.emitter = this.props.services.emitter;
     this.identityService = this.props.services.identityService;
     this.litTokenService = this.props.services.litTokenService;
-    this.handleFileUpload = this.handleFileUpload.bind(this);
-    this.sendToIdentityService = this.sendToIdentityService.bind(this);
     this.state = {
-      file: this.litTokenService.getUserProfile()
+      file: [], 
+      description: '',
+      name: '' 
     };
-    this.doStuff();
-  }
-
-  async doStuff() {
-    console.log(await this.litTokenService.getRegisteredUsers());
   }
 
   setView(view) {
@@ -28,14 +23,20 @@ class EditProfile extends Component {
     this.setState({file: URL.createObjectURL(event.target.files[0])});
   }
 
-  editDescription(text) {
-
+  editDescription(event) {
+    const description = event.target.value;
+    this.setState({description: description});
   }
 
-  sendToIdentityService(event) {
+  editName(event) {
+    const name = event.target.value;
+    this.setState({name: name});
+  }
+
+  async submitEdits(event) {
     event.preventDefault();
-    const {file} = this.state;
-    this.litTokenService.editProfile(file);
+    await this.litTokenService.editProfile(this.state.name, this.state.description, this.state.file);
+    this.emitter.emit('setView', 'MainScreen');
   }
 
   render() {
@@ -44,9 +45,11 @@ class EditProfile extends Component {
       <div>
         <EditProfileView 
           setView={this.setView.bind(this)} 
-          sendToIdentityService={this.sendToIdentityService.bind(this)} 
+          submitEdits={this.submitEdits.bind(this)} 
           handleFileUpload={this.handleFileUpload.bind(this)}
           identity={this.identityService.identity.name}
+          editDescription={this.editDescription.bind(this)}
+          editName={this.editName.bind(this)}
           description="Howdy Do Test Description!"
           name="Francisco Testname"
         />

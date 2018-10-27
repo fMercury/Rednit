@@ -53,22 +53,15 @@ class LitTokenService {
     await this.identityService.execute(message);
   }
 
-  async editProfile(file) {
-    const base64File = await image2base64(file);
-    let profileHash = '';
-    this.swarm.uploadRaw(base64File, async (err, swarmImageHash) => {
-      if(err) return console.error('Error uploading contents', err);
-      let userProfile = this.getUserProfile();
-      userProfile.image = swarmImageHash;
-      this.swarm.uploadRaw(userProfile, async (err, profileHash) => {
-        console.log('calling with');
-        console.log('this.identity.address', this.identityService.identity.address);
-        console.log('profileHash', profileHash);
-        console.log('this.identity.privateKey', this.identityService.identity.privateKey);
-        console.log('DEFAULT_PAYMENT_OPTIONS', DEFAULT_PAYMENT_OPTIONS);
-        await this.executeEditProfile(profileHash);
-        console.log("Success");
-      });
+  async editProfile(name, description, file) {
+    var userProfile = [];
+    userProfile.image = await image2base64(file);;
+    userProfile.description = description;
+    userProfile.name = name;
+    await this.swarm.uploadRaw(JSON.stringify(userProfile), async (err, profileHash) => {
+      if (err) return console.error('Failed Upload ' + err)
+      await this.executeEditProfile(profileHash);
+      console.log(profileHash);
     });
   }
 

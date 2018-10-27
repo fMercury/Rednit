@@ -7,16 +7,16 @@ const EditProfileView = (props) => (
   <div className="subview">
     <div className="container">
       <h1 className="main-title">{props.identity}</h1>
-      <form onSubmit={(event) => props.sendToIdentityService(event)}>
+      <form onSubmit={(event) => props.submitEdits(event)}>
         <img src={testImage} height="400px" width="auto"/>
         <h2> {props.name} </h2>
         <p> {props.description} </p>
         <p>Edit Image: </p>
         <input label='upload new Picture' type='file' onChange={(event) => props.handleFileUpload(event)} />
         <p>Edit Name: </p>
-        <TextBox className="edit-description-text" placeholder={props.name} />
+        <TextBox className="edit-description-text" placeholder={props.name} onChange={(event) => props.editName(event)} />
         <p>Edit Description: </p>
-        <TextBox className="edit-description-text" placeholder={props.description} />
+        <TextBox className="edit-description-text" placeholder={props.description} onChange={(event) => props.editDescription(event)} />
         <button type='submit' className="btn fullwidth cancel-btn">Save Edits</button>
       </form>
       <div className="text-center">
@@ -31,11 +31,13 @@ const EditProfileView = (props) => (
 
 EditProfileView.propTypes = {
   setView: PropTypes.func,
-  sendToIdentityService: PropTypes.func,
+  submitEdits: PropTypes.func,
   handleFileUpload: PropTypes.func,
   identity: PropTypes.string,
   description: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  editDescription: PropTypes.func,
+  editName: PropTypes.func
 };
 
 export default EditProfileView;
