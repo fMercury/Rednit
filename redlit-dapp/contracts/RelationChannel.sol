@@ -3,60 +3,64 @@ pragma solidity ^0.4.24;
 contract RelationChannel {
   address public token;
 
-  struct Lover {
-    address addr;
-    uint8 balance;
-  }
+  address public lover_one;
+  address public lover_two;
+  uint256 public lover_one_balance;
+  uint256 public lover_two_balance;
 
-  Lover public lover_one;
-  Lover public lover_two;
-  uint8 public relationBalance;
-
-  event TokensReceived(address from, uint8 tokens);
-  event TokensWithdrawn(address from, uint8 tokens);
   event RelationEnded();
 
   // Start the relation contract between two lovers with the same amount of
   // tokens stacked
-  constructor(address _token, address _lover_one, address _lover_two, uint8 tokens) public {
+  constructor(address _token, address _lover_one, address _lover_two, uint256 tokens) public {
     require(msg.sender == token);
     token = _token;
-    lover_one = Lover(_lover_one, tokens);
-    lover_two = Lover(_lover_two, tokens);
-    relationBalance = tokens*2;
+    lover_one = _lover_one;
+    lover_two = _lover_two;
+    lover_one_balance = tokens;
+    lover_two_balance = tokens;
   }
 
-  // Send NIT tokens to the relation
-  function send(address sender, uint8 tokens) public {
-    require(msg.sender == token);
-    if (sender == lover_one.addr)
-      lover_one.balance += tokens;
+  function litBalance(address addr) public returns(uint256) {
+    if (addr == lover_one)
+      return (lover_one_balance);
     else
-      lover_two.balance -= tokens;
-    relationBalance += tokens;
-    emit TokensReceived(sender, tokens);
+      return (lover_two_balance);
   }
 
-  // Withdraw NIT tokens form the relation, if relation balance is 0 it gets
-  // destroyed
-  function withdraw(address sender, uint8 tokens) public {
+  function totalBalance() public returns(uint256) {
+    return (lover_one_balance = lover_two_balance);
+  }
+
+  function isLover(address addr) public view returns(bool) {
+    return ((addr == lover_one) || (addr == lover_two));
+  }
+
+  function tokensSent(address lover, uint256 tokens) public {
     require(msg.sender == token);
-    if (sender == lover_one.addr)
-      lover_one.balance -= tokens;
-    else
-      lover_two.balance -= tokens;
-    relationBalance -= tokens;
-    emit TokensWithdrawn(sender, tokens);
-    if (relationBalance == 0)
-      endRelation();
+    if (lover == lover_one) {
+      lover_one_balance += tokens;
+    } else {
+      lover_two_balance += tokens;
+    }
+  }
+
+  function tokensWithdrawn(address lover, uint256 tokens) public {
+    require(msg.sender == token);
+    if (lover == lover_one) {
+      lover_one_balance -= tokens;
+    } else {
+      lover_two_balance -= tokens;
+    }
   }
 
   // End relation function, destroys the contract and split the balance between
   // ex lovers
-  function endRelation() internal {
+  function endRelation() public {
+    require(msg.sender == token);
     if (address(this).balance > 0) {
-      lover_one.addr.transfer(address(this).balance/2);
-      lover_two.addr.transfer(address(this).balance/2);
+      lover_one.transfer(address(this).balance/2);
+      lover_two.transfer(address(this).balance/2);
     }
     selfdestruct(address(0));
     emit RelationEnded();
