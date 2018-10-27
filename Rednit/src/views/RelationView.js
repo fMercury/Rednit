@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-const ProfileView  = (props) => (
+const RelationView  = (props) => (
       <div className="subview">
         <div className="container">
           <h1 className="main-title">Profile</h1>
-          <p className="profile-text">
-            Your Profile!!
+          <p className="relation-text">
+            Your Relation!!
           </p>
 
         </div>
@@ -20,8 +20,8 @@ const ProfileView  = (props) => (
 );
 
 
-ProfileView.propTypes = {
+RelationView.propTypes = {
   setView: PropTypes.func
 };
 
-export default ProfileView;
+export default RelationView;

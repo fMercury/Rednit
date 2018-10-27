@@ -6,6 +6,8 @@ import BackupCodeAccordionView from '../views/BackupCodeAccordionView';
 import LogoutAccordionView from '../views/LogoutAccordionView';
 import EditProfileAccordionView from '../views/EditProfileAccordionView';
 import ProfileAccordionView from '../views/ProfileAccordionView';
+import RelationAccordionView from '../views/RelationAccordionView';
+import SwapAccordionView from '../views/SwapAccordionView';
 import SettingsAccordion from './SettingsAccordion';
 import PropTypes from 'prop-types';
 
@@ -39,11 +41,17 @@ class Account extends Component {
           />
           <hr className="separator" />
           <ProfileAccordionView setView={this.setView.bind(this)} />
-
+            
           <hr className="separator" />
           <EditProfileAccordionView setView={this.setView.bind(this)} />
           <hr className="separator" />
           <BackupCodeAccordionView setView={this.setView.bind(this)} />
+
+          <hr className="separator" />
+          <RelationAccordionView setView={this.setView.bind(this)} />
+          <hr className="separator" />
+          <SwapAccordionView setView={this.setView.bind(this)} />
+
           <hr className="separator" />
           <LogoutAccordionView logout={this.logout.bind(this)} />
           <hr className="separator" />

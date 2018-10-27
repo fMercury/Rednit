@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-const ProfileView  = (props) => (
+const EditProfileView = (props) => (
       <div className="subview">
         <div className="container">
-          <h1 className="main-title">Profile</h1>
-          <p className="profile-text">
-            Your Profile!!
+          <h1 className="main-title">Edit Profile</h1>
+          <p className="backup-text">
+            Edit your profile!
           </p>
+
 
         </div>
 
@@ -20,8 +21,8 @@ const ProfileView  = (props) => (
 );
 
 
-ProfileView.propTypes = {
+EditProfileView.propTypes = {
   setView: PropTypes.func
 };
 
-export default ProfileView;
+export default EditProfileView;
