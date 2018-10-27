@@ -12,6 +12,27 @@ class RednitTokenService {
   }
 
   async getBalance(address) {
+    this.rednitTokenContract = new ethers.Contract(
+      this.rednitTokenContractAddress,
+      RednitToken.interface,
+      this.provider
+    );
+    return await this.rednitTokenContract.balances(address);
+  };
+
+  async sendToRelation(address) {
+    return await this.rednitTokenContract.balance(address);
+  }
+
+  async withdrawFromRelation(address) {
+    return await this.rednitTokenContract.balance(address);
+  }
+
+  async sendRelationRequest(address) {
+    return await this.rednitTokenContract.balance(address);
+  }
+
+  async acceptRelationRequest(address) {
     return await this.rednitTokenContract.balance(address);
   }
 
