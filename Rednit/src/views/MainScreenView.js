@@ -23,7 +23,7 @@ class MainScreenView extends Component {
           <p>
             You have{' '}
             <span className="bold">
-              {this.props.clicksLeft} <em>kliks</em>
+              {this.props.clicksLeft} <em>GasTokens</em>
             </span>{' '}
             left
           </p>

@@ -35,6 +35,11 @@ class MainScreen extends Component {
   async update() {
     const {tokenService} = await this.props.services;
     const {identityService} = this.props.services;
+    const {address} = identityService.identity; 
+    const balance = await tokenService.getBalance(address); 
+    const clicksLeft = parseInt(balance, 10); 
+    this.setState({clicksLeft});  
+    setTimeout(this.update.bind(this), 1000);
   }
 
   render() {
