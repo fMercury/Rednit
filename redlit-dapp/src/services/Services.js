@@ -1,13 +1,13 @@
 import {EventEmitter} from 'fbemitter';
 import EthereumIdentitySDK from 'universal-login-sdk';
 import ethers from 'ethers';
-import config, {clickerContractAddress, tokenContractAddress, rednitTokenContractAddress} from '../../config/config';
+import config, {clickerContractAddress, tokenContractAddress, litTokenAddress} from '../../config/config';
 import IdentityService from './IdentityService';
 import ClickerService from './ClickerService';
 import EnsService from './EnsService';
 import AuthorisationService from './AuthorisationService';
 import TokenService from './TokenService';
-import RednitTokenService from './RednitTokenService';
+import LitTokenService from './LitTokenService';
 import IdentitySelectionService from './IdentitySelectionService';
 import BackupService from './BackupService';
 import GreetingService from './GreetingService';
@@ -27,7 +27,7 @@ class Services {
     this.clickerService = new ClickerService(this.identityService, clickerContractAddress, this.provider, this.ensService);
     this.authorisationService = new AuthorisationService(this.sdk, this.emitter);
     this.identitySelectionService = new IdentitySelectionService(this.sdk, config.ensDomains);
-    this.rednitTokenService = new RednitTokenService(rednitTokenContractAddress, this.identityService, this.ensService, this.provider)
+    this.rednitTokenService = new LitTokenService(litTokenAddress, this.identityService, this.ensService, this.provider)
     this.greetingService = new GreetingService(this.provider);
   }
 

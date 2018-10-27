@@ -5,15 +5,15 @@ import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
 import LitToken from '../../build/LitToken';
 
 class LitTokenService {
-  constructor(litTokenContractAddress, identityService, ensService, provider) {
-    this.litTokenContractAddress = litTokenContractAddress;
+  constructor(litTokenAddress, identityService, ensService, provider) {
+    this.litTokenAddress = litTokenAddress;
     this.identityService = identityService;
     this.provider = provider;
   }
 
   async getBalance(address) {
     this.litTokenContract = new ethers.Contract(
-      this.litTokenContractAddress,
+      this.litTokenAddress,
       LitToken.interface,
       this.provider
     );
@@ -39,7 +39,7 @@ class LitTokenService {
   async register() {
     const {data} = new Interface(LitToken.interface).functions.register();
     const message = {
-      to: this.litTokenContractAddress,
+      to: this.litTokenAddress,
       from: this.identityService.identity.address,
       value: 0,
       data,
