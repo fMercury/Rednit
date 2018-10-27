@@ -49,20 +49,20 @@ class MainScreenView extends Component {
             </div>
           </div>
           <div className="row text-center">
-            <div className="col-12 text-center">{name}</div>
+            <div className="col-12 text-left profile-name">{name}</div>
           </div>
           <div className="row text-center">
-            <div className="col-12 text-center">{description}</div>
+            <div className="col-12 text-left profile-description">{description}</div>
           </div>
           <div className="row">
             <div className="col-6 text-center">
               <button onClick={this.props.rejectProfile}>
-                <i class="fas fa-3x fa-times-circle"></i>
+                <img src={require('../img/no.svg')}/>
               </button>
             </div>
             <div className="col-6 text-center">
               <button onClick={this.props.acceptProfile}>
-                <i class="fas fa-3x fa-check"></i>
+                <img src={require('../img/yes.svg')}/>
               </button>
             </div>
           </div>

@@ -15,9 +15,24 @@
 .login-image {
   margin-top: 50px;
   margin-bottom: 50px;
+  height: "auto";
+  width: "80%";
 }
 
 .photos-section {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.profile-name {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: #9FA7B3;
+}
+
+.profile-description {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: #9D9D9D;
 }

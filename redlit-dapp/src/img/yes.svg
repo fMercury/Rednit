@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="71px" height="71px" viewBox="0 0 71 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>yes</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="31.5" cy="31.5" r="31.5"></circle>
+        <filter x="-11.1%" y="-7.9%" width="122.2%" height="122.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.231372549   0 0 0 0 0.231372549   0 0 0 0 0.231372549  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main" transform="translate(-247.000000, -595.000000)">
+            <g id="yes" transform="translate(251.000000, 597.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M48.3270197,20.6611252 C49.2243268,21.5388584 49.2243268,22.9741217 48.3270197,23.855622 L29.5104145,42.3369912 C29.061761,42.7777414 28.4750603,43 27.8845249,43 C27.2978241,43 26.7111234,42.7777414 26.2624699,42.3369912 L16.6758563,32.9192531 C15.7747146,32.0415199 15.7747146,30.6062567 16.6758563,29.7247564 C17.5731633,28.8432561 19.0264939,28.8432561 19.9238009,29.7247564 L27.8845249,37.541479 L45.0752404,20.6611252 C45.9725474,19.7796249 47.425878,19.7796249 48.3270197,20.6611252 Z" id="Check-mark" fill="#DF4723"></path>
+            </g>
+        </g>
+    </g>
+</svg>

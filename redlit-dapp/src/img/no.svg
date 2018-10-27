@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="71px" height="71px" viewBox="0 0 71 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>no</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="31.5" cy="31.5" r="31.5"></circle>
+        <filter x="-11.1%" y="-7.9%" width="122.2%" height="122.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.229990434   0 0 0 0 0.229990434   0 0 0 0 0.229990434  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main" transform="translate(-65.000000, -595.000000)">
+            <g id="no" transform="translate(69.000000, 597.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M42.3388206,23.8587571 L34.6985258,31.5009416 L42.3388206,39.1431262 C43.2203931,40.0244821 43.2203931,41.4557439 42.3388206,42.3370998 C41.8980344,42.7777778 41.3178542,43 40.7414414,43 C40.1650287,43 39.5886159,42.7777778 39.1440622,42.3370998 L31.5,34.6949153 L23.8559378,42.3370998 C23.4151515,42.7777778 22.8349713,43 22.2585586,43 C21.6821458,43 21.1019656,42.7777778 20.6611794,42.3370998 C19.7796069,41.4557439 19.7796069,40.0244821 20.6611794,39.1431262 L28.3014742,31.5009416 L20.6611794,23.8587571 C19.7796069,22.9774011 19.7796069,21.5461394 20.6611794,20.6610169 C21.5427518,19.779661 22.9705979,19.779661 23.8559378,20.6610169 L31.5,28.3032015 L39.1440622,20.6610169 C40.0294021,19.779661 41.4572482,19.779661 42.3388206,20.6610169 C43.2203931,21.5461394 43.2203931,22.9774011 42.3388206,23.8587571 Z" id="Not-secure" fill="#555555"></path>
+            </g>
+        </g>
+    </g>
+</svg>
