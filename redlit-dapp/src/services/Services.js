@@ -22,12 +22,12 @@ class Services {
     this.ensService = new EnsService(this.sdk, this.provider);
     this.tokenService = new TokenService(tokenContractAddress, this.provider);
     this.storageService = new StorageService();
-    this.identityService = new IdentityService(this.sdk, this.emitter, this.storageService, this.provider);
+    this.identityService = new IdentityService(this.sdk, this.emitter, this.storageService, this.provider, this.config.swarmProvider);
     this.backupService = new BackupService(this.identityService);
     this.clickerService = new ClickerService(this.identityService, clickerContractAddress, this.provider, this.ensService);
     this.authorisationService = new AuthorisationService(this.sdk, this.emitter);
     this.identitySelectionService = new IdentitySelectionService(this.sdk, config.ensDomains);
-    this.rednitTokenService = new LitTokenService(litTokenAddress, this.identityService, this.ensService, this.provider)
+    this.litTokenService = new LitTokenService(litTokenAddress, this.identityService, this.ensService, this.provider, this.config.swarmProvider)
     this.greetingService = new GreetingService(this.provider);
   }
 
