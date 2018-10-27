@@ -1,8 +1,47 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Blockies from 'react-blockies';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+Modal.setAppElement('#app');
 
 class MainScreenView extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
   renderEvent(event) {
     return (
       <p className="click-history-item" key={event.key}>
@@ -31,7 +70,7 @@ class MainScreenView extends Component {
           <div className="row">
             <div className="col-4 text-center">
               <button onClick={this.props.rejectProfile}>
-                <i class="fas fa-1x fa-user"></i>
+                <i className="fas fa-1x fa-user"></i>
               </button>
             </div>
             <div className="col-4 text-center">
@@ -61,12 +100,33 @@ class MainScreenView extends Component {
               </button>
             </div>
             <div className="col-6 text-center">
-              <button onClick={this.props.acceptProfile}>
+              <button onClick={this.openModal}>
                 <img src={require('../img/yes.svg')}/>
               </button>
             </div>
           </div>
         </div>
+        <div>
+
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2 ref={subtitle => this.subtitle = subtitle}>Spark</h2>
+          <div className="row  text-center">
+            <form>
+              <input type="number" min="1" max="100" />
+              <button onClick={this.openModal}><img src={require('../img/fire.png')} width=""/></button>
+            </form>
+          </div>
+          <div className="row text-center">
+            <button onClick={this.closeModal}>Back</button>
+          </div>
+        </Modal>
+       </div>
       </div>
     );
   }
