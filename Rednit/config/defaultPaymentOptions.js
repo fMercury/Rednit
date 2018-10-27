@@ -1,5 +1,5 @@
 const DEFAULT_PAYMENT_OPTIONS = {
-  gasPrice: 110000000000000,
+  gasPrice: 0,
   gasLimit: 1000000
 };
 
