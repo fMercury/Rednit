@@ -1,0 +1,23 @@
+.login-view {
+  background-color:#DF4722;
+  height: "100%";
+  padding-bottom: 100px;
+}
+
+.id-selector {
+  border-radius: 3px;
+}
+
+.id-selector input {
+  border-radius: 3px;
+}
+
+.login-image {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.photos-section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

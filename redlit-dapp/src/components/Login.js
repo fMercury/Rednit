@@ -61,9 +61,9 @@ class Login extends Component {
     const {ensDomains} = this.props.services.config;
     return (
       <div className="login-view">
-        <div className="container">
-          <img src={require('../img/redlit.jpg')} height="158px" width="480px"/>
-          <IdentitySelector
+        <div className="container text-center">
+          <img src={require('../img/redlit.jpg')} height="158px" width="480px" className="login-image"/>
+          <IdentitySelector className="login-selector"
             onNextClick={(identity) => this.onNextClick(identity)}
             onChange={this.onChange.bind(this)}
             ensDomains={ensDomains}
