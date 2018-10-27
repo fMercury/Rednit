@@ -9,9 +9,19 @@ import PropTypes from 'prop-types';
 class MainScreen extends Component {
   constructor(props) {
     super(props);
-    const {rednitTokenService} = this.props.services;
-    this.rednitTokenService = rednitTokenService;
-    this.state = {lastClick: '0', lastPresser: 'nobody', events: []};
+    this.litTokenService = this.props.services.litTokenService;
+    this.ensService = this.props.services.ensService;
+    this.state = {events: [], profile: [], ensName: '', address: ''};
+    this.getProfile();
+  }
+
+  async getProfile(){
+    const profiles = await this.litTokenService.getRegisteredUsers();
+    const rand = Math.floor(Math.random() * profiles.length);
+    const ensName = await this.ensService.getEnsName(profiles[rand]);
+    const profile = await this.litTokenService.getUserProfile(profiles[rand]);
+    this.setState({ address: profiles[rand], ensName: ensName, profile: profile })
+    
   }
 
   setView(view) {
@@ -32,8 +42,12 @@ class MainScreen extends Component {
     this.setView("Account");
   }
 
-  goToRelations(){
+  goToRelations() {
     this.setView("Relation");
+  }
+
+  async rejectProfile() {
+    this.getProfile();
   }
 
   async update() {
@@ -50,9 +64,9 @@ class MainScreen extends Component {
     return (
       <div>
         <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-        <MainScreenView goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
+        <MainScreenView name={this.state.ensName} description={this.state.profile} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
       </div>
-    );
+      )
   }
 }
 

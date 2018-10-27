@@ -75,10 +75,10 @@ class MainScreenView extends Component {
             </div>
           </div>
           <div className="row text-center">
-            <div className="col-12 text-left profile-name">{name}</div>
+            <div className="col-12 text-left profile-name">{this.props.name}</div>
           </div>
           <div className="row text-center">
-            <div className="col-12 text-left profile-description">{description}</div>
+            <div className="col-12 text-left profile-description">{this.props.description}</div>
           </div>
           <div className="row">
             <div className="col-6 text-center">
@@ -121,7 +121,10 @@ class MainScreenView extends Component {
 
 MainScreenView.propTypes = {
   events: PropTypes.array,
-  goToProfile: PropTypes.func
+  goToProfile: PropTypes.func,
+  rejectProfile: PropTypes.func,
+  name: PropTypes.string,
+  description: PropTypes.string
 };
 
 export default MainScreenView;
