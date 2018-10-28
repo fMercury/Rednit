@@ -8,7 +8,26 @@ class Relations extends Component {
   constructor(props) {
     super(props);
     this.emitter = this.props.services.emitter;
+    this.litTokenService = this.props.services.litTokenService;
+    this.state = {
+      relations: []
+    };
+    this.getRelations();
   }
+
+  async getRelations(){
+    var updatedRelations = [];
+    let relations = await this.litTokenService.getRelationChannels();
+    for (relation in relations) {
+      var aRelation = {}
+      aRelation.tokens = await this.litTokenService.getStake(relation.contract);
+      aRelation.name = await this.litTokenService.getUserProfile(relation.lover).name;
+      aRelation.address = relation.contract;
+      updatedRelations.push(aRelation);
+    }
+    this.setState({ relations: updatedRelations });
+  }
+
 
   setView(view) {
     const {emitter} = this.props.services;
