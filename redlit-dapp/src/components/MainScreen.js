@@ -11,11 +11,12 @@ class MainScreen extends Component {
     super(props);
     this.litTokenService = this.props.services.litTokenService;
     this.ensService = this.props.services.ensService;
-    this.state = {events: [], profile: [], ensName: '', address: ''};
+    this.state = {events: [], profile: [], ensName: '', address: '', isLoading: true};
     this.getProfile();
   }
 
   async getProfile(){
+    this.setState({ isLoading:true })
     const profiles = await this.litTokenService.getRegisteredUsers();
     const rand = Math.floor(Math.random() * profiles.length);
     const ensName = await this.ensService.getEnsName(profiles[rand]);
@@ -27,8 +28,8 @@ class MainScreen extends Component {
       profile.image = 'default';
     }
     if (!profile.image) profile.image = 'default';
-    
-    this.setState({ address: profiles[rand], ensName: ensName, profile: profile })
+
+    this.setState({ address: profiles[rand], ensName: ensName, profile: profile, isLoading: false})
     
   }
 
@@ -69,7 +70,7 @@ class MainScreen extends Component {
     return (
       <div>
         <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-        <MainScreenView name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
+        <MainScreenView isLoading={this.state.isLoading} name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
       </div>
       )
   }
