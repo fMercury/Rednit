@@ -19,7 +19,13 @@ class MainScreen extends Component {
     const profiles = await this.litTokenService.getRegisteredUsers();
     const rand = Math.floor(Math.random() * profiles.length);
     const ensName = await this.ensService.getEnsName(profiles[rand]);
-    const profile = await this.litTokenService.getUserProfile(profiles[rand]);
+    var profile = await this.litTokenService.getUserProfile(profiles[rand]);
+    if (profile === ''){
+      profile = [];
+      profile.name = ensName;
+      profile.description = 'No description given';
+      profile.image = 'default';
+    }
     this.setState({ address: profiles[rand], ensName: ensName, profile: profile })
     
   }
@@ -51,20 +57,17 @@ class MainScreen extends Component {
   }
 
   async update() {
-    const {tokenService} = await this.props.services;
-    const {identityService} = this.props.services;
-    const {address} = identityService.identity; 
-    const balance = await tokenService.getBalance(address); 
-    const clicksLeft = parseInt(balance, 10); 
-    this.setState({clicksLeft});  
-    setTimeout(this.update.bind(this), 1000);
+    // const {tokenService} = await this.props.services;
+    // const {identityService} = this.props.services;
+    // const {address} = identityService.identity; 
+    // setTimeout(this.update.bind(this), 1000);
   }
 
   render() {
     return (
       <div>
         <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-        <MainScreenView name={this.state.ensName} description={this.state.profile} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
+        <MainScreenView name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
       </div>
       )
   }
