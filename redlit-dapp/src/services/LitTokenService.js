@@ -197,7 +197,8 @@ class LitTokenService {
 
   async getUserProfile(userAddress=this.identityService.identity.address) {
     const profileEditEvent = new Interface(LitToken.interface).events.ProfileEdit;
-    var profileEdit = '';
+    var profileEdit = {};
+    var profileHash = '';
     const filter = {
       fromBlock: 0,
       address: this.litTokenContractAddress,
@@ -207,12 +208,12 @@ class LitTokenService {
     for (const event of events) {
       const eventArguments = profileEditEvent.parse(profileEditEvent.topics, event.data);
       if (eventArguments.user === userAddress) {
-        profileEdit = eventArguments.profileHash;
+        profileHash = eventArguments.profileHash;
       }
     }
 
-    if (profileEdit !== '') {
-      let content = await ipfs.cat(profileEdit).catch(err => console.log(err));
+    if (profileHash) {
+      let content = await ipfs.cat(profileHash).catch(err => console.log(err));
       profileEdit = JSON.parse(content.toString('utf8'));
     }
 
