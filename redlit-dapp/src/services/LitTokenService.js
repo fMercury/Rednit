@@ -79,6 +79,31 @@ class LitTokenService {
     await this.identityService.execute(message);
   }
 
+  async getRelationChannels(userAddress=this.identityService.identity.address) {
+    const relationChannelCreatedEvent = new Interface(LitToken.interface).events.RelationChannelCreated;
+    var relations = [];
+    const filter = {
+      fromBlock: 0,
+      address: this.litTokenContractAddress,
+      topics: [relationChannelCreatedEvent.topics]
+    };
+    const events = await this.provider.getLogs(filter);
+    for (const event of events) {
+      const eventArguments = relationChannelCreatedEvent.parse(relationChannelCreatedEvent.topics, event.data);
+      if (eventArguments.personA === userAddress || eventArguments.personB === userAddress) {
+        var relation = {};
+        if (eventArguments.personA === userAddress) {
+          relation.lover = eventArguments.personB;
+        } else {
+          relation.lover = eventArguments.personA;
+        }
+        relation.contract = eventArguments.relationChannel;
+        relations.push(relation);
+      }
+    }
+
+    return relations;
+  }
 
   async getUserProfile(userAddress=this.identityService.identity.address) {
     const profileEditEvent = new Interface(LitToken.interface).events.ProfileEdit;

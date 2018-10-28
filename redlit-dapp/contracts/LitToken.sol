@@ -12,6 +12,7 @@ contract LitToken is StandardToken {
   mapping (address => bool) public registeredUsers;
 
   event ProfileEdit(address user, string profileHash);
+  event RelationChannelCreated(address relationChannel, address personA, address personB);
   event RegisterUser(address user);
 
   struct Request {
@@ -65,6 +66,8 @@ contract LitToken is StandardToken {
     relations[newRelation][msg.sender] = tokens;
     relations[newRelation][from] = tokens;
 
+
+    emit RelationChannelCreated(newRelation, from, msg.sender);
     _transfer(address(0), from, change);
     _transfer(address(0), newRelation, tokens);
     _transfer(msg.sender, newRelation, tokens);
