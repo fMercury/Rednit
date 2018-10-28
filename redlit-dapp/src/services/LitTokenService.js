@@ -54,14 +54,17 @@ class LitTokenService {
   }
 
   async editProfile(name, description, file) {
-    var userProfile = [];
+    console.log("editing")
+    const userProfile = {};
     userProfile.image = await image2base64(file);;
     userProfile.description = description;
     userProfile.name = name;
-    await this.swarm.uploadRaw(JSON.stringify(userProfile), async (err, profileHash) => {
-      if (err) return console.error('Failed Upload ' + err)
-      await this.executeEditProfile(profileHash);
+    const userProfleJSON = JSON.stringify(userProfile)
+    console.log(userProfleJSON);
+    await this.swarm.uploadRaw(userProfleJSON, async (err, profileHash) => {
+      if (err) console.log(err)
       console.log(profileHash);
+      await this.executeEditProfile(profileHash);
     });
   }
 
@@ -81,7 +84,7 @@ class LitTokenService {
 
   async getUserProfile(userAddress=this.identityService.identity.address) {
     const profileEditEvent = new Interface(LitToken.interface).events.ProfileEdit;
-    var profileEdit = [];
+    var profileEdit = '';
     const filter = {
       fromBlock: 0,
       address: this.litTokenContractAddress,
@@ -94,6 +97,18 @@ class LitTokenService {
         profileEdit = eventArguments.profileHash;
       }
     }
+
+    if (profileEdit !== '') { 
+      console.log("getting swarm data");
+      await this.swarm.downloadRaw(profileEdit, (err, content) => {
+        if(err) return console.error(err);
+        console.log(profileEdit);
+        console.log(content);
+        profileEdit = JSON.parse(content);
+        console.log(`contents of our test: ${profileEdit}`);
+      });
+    }
+
     return profileEdit;
   }
 

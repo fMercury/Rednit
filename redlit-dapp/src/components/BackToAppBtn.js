@@ -6,7 +6,7 @@ const BackToAppBtn = (props) => (
     onClick={() => props.setView('MainScreen')}
     className="btn back-to-app"
   >
-    <span className="back-to-app-text">Back to App</span>
+    <span className="back-to-app-text">Back</span>
   </button>
 );
 
