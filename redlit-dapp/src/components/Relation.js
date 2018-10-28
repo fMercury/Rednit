@@ -22,15 +22,29 @@ class Relation extends Component {
     this.emitter.emit('setView', view);
   }
 
+  goToRelations() {
+    this.setView("Relations");
+  }
+
   render() {
+
+    const relation = {
+      name: "lover name",
+      loverTokens: 87,
+      myTokens: 69,
+      transactions: [
+        {name: "me", tokens: -3},
+        {name: "lover", tokens: 5},
+      ]
+    };
     return (
       <div className="account">
         <HeaderView>
-          <BackToAppBtn setView={this.setView.bind(this)} />
+          <BackToAppBtn setView={this.goToRelations.bind(this)} />
         </HeaderView>
 
         <div className="container">
-          <RelationView setView={this.setView.bind(this)} />
+          <RelationView setView={this.setView.bind(this)} relation={relation} />
         </div>
       </div>
     );
