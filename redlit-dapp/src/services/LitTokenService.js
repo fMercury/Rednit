@@ -48,19 +48,55 @@ class LitTokenService {
   }
 
   async sendRelationRequest(toAddress, numTokens) {
-    return await this.litTokenContract.submitRequest(toAddress, numTokens);
+    const {data} = new Interface(LitToken.interface).functions.submitRequest(toAddress, numTokens);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
   async acceptRelationRequest(fromAddress, numTokens) {
-    return await this.litTokenContract.acceptRequest(fromAddress, numTokens);
+    const {data} = new Interface(LitToken.interface).functions.acceptRequest(fromAddress, numTokens);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
   async senderCancelRequest(toAddress) {
-    return await this.litTokenContract.cancelRequestSender(toAddress);
+    const {data} = new Interface(LitToken.interface).functions.cancelRequestSender(toAddress);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
   async receiverCancelRequest(fromAddress) {
-    return await this.litTokenContract.cancelRequestReceiver(fromAddress);
+    const {data} = new Interface(LitToken.interface).functions.cancelRequestReceiver(fromAddress);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    }
+    await this.identityService.execute(message);
   }
 
   async register() {
