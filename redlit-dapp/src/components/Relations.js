@@ -13,6 +13,7 @@ class Relations extends Component {
       relations: []
     };
     this.getRelations();
+    this.getRequests();
   }
 
   async getRelations(){
@@ -28,6 +29,10 @@ class Relations extends Component {
     this.setState({ relations: updatedRelations });
   }
 
+  async getRequests(){
+    let requests = await this.litTokenService.getPendingRequests();
+    this.setState({ requests: requests });
+  }
 
   setView(view) {
     const {emitter} = this.props.services;
@@ -40,13 +45,15 @@ class Relations extends Component {
 
   render() {
 
-    const relations = [
-      {name: "augusto", tokens: 50, address: "0x1234"},
-      {name: "matias", tokens: 1, address: "0x1234"},
-      {name: "franco", tokens: 1, address: "0x1234"},
-      {name: "kyle", tokens: 60, address: "0x1234"},
-      {name: "lili", tokens: 99, address: "0x1234"}
-    ];
+    // const relations = [
+    //   {name: "augusto", tokens: 50, address: "0x1234"},
+    //   {name: "matias", tokens: 1, address: "0x1234"},
+    //   {name: "franco", tokens: 1, address: "0x1234"},
+    //   {name: "kyle", tokens: 60, address: "0x1234"},
+    //   {name: "lili", tokens: 99, address: "0x1234"}
+    // ];
+
+    console.log(this.state);
 
     return (
       <div className="account">
@@ -55,7 +62,12 @@ class Relations extends Component {
         </HeaderView>
 
         <div className="container">
-          <RelationsView setView={this.setView.bind(this)} goToRelation={this.goToRelation.bind(this)} relations={relations} />
+          <RelationsView
+          setView={this.setView.bind(this)}
+          goToRelation={this.goToRelation.bind(this)}
+          relations={this.state.relations}
+          requests={this.state.requests}
+        />
         </div>
       </div>
     );

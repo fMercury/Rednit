@@ -42,7 +42,6 @@ class MainScreenView extends Component {
     this.setState({modalIsOpen: false});
   }
 
-
   render() {
 
     var image = this.props.image;
@@ -51,6 +50,8 @@ class MainScreenView extends Component {
     } else {
       image = " data:image/jpeg;base64," + image;
     }
+
+    console.log(this.props)
 
     return (
       <div className="main-screen">
@@ -122,7 +123,7 @@ class MainScreenView extends Component {
           <div className="row  text-center">
             <form>
               <input type="range" min="1" max="100" value={this.props.tokenAmount} onChange={this.props.handleSlideChange} />
-              <button onClick={this.props.sendLit}><img src={require('../img/fire.png')} width=""/></button>
+              <button onClick={this.props.submitRequest}><img src={require('../img/fire.png')} width=""/></button>
             </form>
           </div>
           <div className="row text-center">
@@ -140,7 +141,7 @@ MainScreenView.propTypes = {
   goToProfile: PropTypes.func,
   rejectProfile: PropTypes.func,
   handleSlideChange: PropTypes.func,
-  sendLit: PropTypes.func,
+  submitRequest: PropTypes.func,
   name: PropTypes.string,
   image: PropTypes.string,
   description: PropTypes.string,

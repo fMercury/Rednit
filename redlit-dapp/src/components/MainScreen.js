@@ -17,21 +17,27 @@ class MainScreen extends Component {
   }
 
   async getProfile(){
+    console.log(await this.litTokenService.getBalance(this.identityService.identity.address));
+
     this.setState({ isLoading:true })
     var profiles = await this.litTokenService.getRegisteredUsers();
+    console.log(profiles)
     profiles = profiles.filter(addr => addr != this.identityService.identity.address);
     var profile = {
       name: "",
       description: "",
-      image: "default"
-    }
+      image: "default",
+      address: "0x0"
+    };
     if (profiles.length > 0){
       const rand = Math.floor(Math.random() * profiles.length);
       const ensName = await this.ensService.getEnsName(profiles[rand]);
       var profile = await this.litTokenService.getUserProfile(profiles[rand]);
+      profile.address = profiles[rand];
     }
-    console.log(profiles.length == 0)
+    console.log(profile)
     this.setState({
+      address: profile.address,
       ensName: profile.ensName,
       profile: profile,
       isLoading: false,
@@ -69,11 +75,11 @@ class MainScreen extends Component {
     this.getProfile();
   }
 
-  async sendLit() {
+  async submitRequest() {
     const {tokenAmount, address} = this.state;
     console.log(`sending ${tokenAmount} Lit to ${address}`);
-    await this.litTokenService.sendLit(address, tokenAmount);
-    this.getProfile();
+    await this.litTokenService.submitRequest(address, tokenAmount);
+    // this.getProfile();
   }
 
   async handleSlideChange(event) {
@@ -101,7 +107,7 @@ class MainScreen extends Component {
           goToRelations={this.goToRelations.bind(this)}
           goToProfile={this.goToProfile.bind(this)}
           events={this.state.events}
-          sendLit={this.sendLit.bind(this)}
+          submitRequest={this.submitRequest.bind(this)}
           handleSlideChange={this.handleSlideChange.bind(this)}
           tokenAmount={this.state.tokenAmount}
         />

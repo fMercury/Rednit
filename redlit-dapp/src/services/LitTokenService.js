@@ -22,7 +22,7 @@ class LitTokenService {
       LitToken.interface,
       this.provider
     );
-    return await this.litTokenContract.balances(address);
+    return utils.formatEther(await this.litTokenContract.balanceOf(address));
   };
 
   async getStake(relationAddress, userAddress=this.identityService.identity.address) {
@@ -138,6 +138,7 @@ class LitTokenService {
     };
     const events = await this.provider.getLogs(filter);
     for (const event of events) {
+      console.log(event);
       const eventArguments = connectionRequestEvent.parse(connectionRequestEvent.topics, event.data);
       if (userAddress === eventArguments.receiver) {
         this.litTokenContract = new ethers.Contract(
@@ -198,9 +199,9 @@ class LitTokenService {
     return registeredUsers;
   }
 
-  async sendLit(to, tokens) {
-    console.log(to, tokens);
-    const {data} = new Interface(LitToken.interface).functions.submitRequest('0xc88Be04c809856B75E3DfE19eB4dCf0a3B15317a', tokens);
+  async submitRequest(to, tokens) {
+    console.log(to, utils.parseEther("1"));
+    const {data} = new Interface(LitToken.interface).functions.submitRequest(to, utils.parseEther("1"));
     const message = {
       to: this.litTokenContractAddress,
       from: this.identityService.identity.address,
@@ -210,7 +211,7 @@ class LitTokenService {
       ...DEFAULT_PAYMENT_OPTIONS
     };
     console.log('send tx');
-    const tx = await this.identityService.execute(message).catch(console.log);
+    const tx = await this.identityService.execute(message);
     console.log(tx);
   }
 }
