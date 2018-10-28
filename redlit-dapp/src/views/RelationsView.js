@@ -13,12 +13,22 @@ class RelationView extends Component {
     console.log(this.props.relations);
     return(
       <div className="container">
-        <h1 className="main-title">Matches</h1>
+        <h1 className="relations-title">Matches</h1>
         <div>
           {
             this.props.relations.length ? this.props.relations.map((relation, i) =>
               (<div key={i} className="row match-row" onClick={this.props.goToRelation}>
                 <strong>{relation.name}</strong> - {relation.tokens} Tokens
+              </div>)) : '-'
+          }
+        </div>
+        <h1 className="relations-title">Requests</h1>
+        <div>
+          {
+            this.props.relations.length ? this.props.relations.map((relation, i) =>
+              (<div key={i} className="row match-row" onClick={this.props.goToRelation}>
+                <strong>{relation.name}</strong> - {relation.tokens} Tokens
+                <a className="request-button">Accept</a><a className="request-button"> Cancel</a>
               </div>)) : '-'
           }
         </div>
