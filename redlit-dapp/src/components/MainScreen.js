@@ -11,26 +11,33 @@ class MainScreen extends Component {
     super(props);
     this.litTokenService = this.props.services.litTokenService;
     this.ensService = this.props.services.ensService;
-    this.state = {events: [], profile: [], ensName: '', address: '', isLoading: true};
+    this.identityService = this.props.services.identityService;
+    this.state = {events: [], profile: [], ensName: '', address: '', isLoading: true, noProfiles: false};
     this.getProfile();
   }
 
   async getProfile(){
     this.setState({ isLoading:true })
-    const profiles = await this.litTokenService.getRegisteredUsers();
-    const rand = Math.floor(Math.random() * profiles.length);
-    const ensName = await this.ensService.getEnsName(profiles[rand]);
-    var profile = await this.litTokenService.getUserProfile(profiles[rand]);
-    if (profile === ''){
-      profile = [];
-      profile.name = ensName;
-      profile.description = 'No description given';
-      profile.image = 'default';
+    var profiles = await this.litTokenService.getRegisteredUsers();
+    profiles = profiles.filter(addr => addr != this.identityService.identity.address);
+    var profile = {
+      name: "",
+      description: "",
+      image: "default"
     }
-    if (!profile.image) profile.image = 'default';
-
-    this.setState({ address: profiles[rand], ensName: ensName, profile: profile, isLoading: false, tokenAmount: 1})
-
+    if (profiles.length > 0){
+      const rand = Math.floor(Math.random() * profiles.length);
+      const ensName = await this.ensService.getEnsName(profiles[rand]);
+      var profile = await this.litTokenService.getUserProfile(profiles[rand]);
+    }
+    console.log(profiles.length == 0)
+    this.setState({
+      ensName: profile.ensName,
+      profile: profile,
+      isLoading: false,
+      tokenAmount: 1,
+      noProfiles: profiles.length == 0
+    });
   }
 
   setView(view) {
@@ -84,7 +91,20 @@ class MainScreen extends Component {
     return (
       <div>
         <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-        <MainScreenView isLoading={this.state.isLoading} name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} sendLit={this.sendLit.bind(this)} handleSlideChange={this.handleSlideChange.bind(this)} tokenAmount={this.state.tokenAmount}/>
+        <MainScreenView
+          isLoading={this.state.isLoading}
+          noProfiles={this.state.noProfiles}
+          name={this.state.profile.name}
+          image={this.state.profile.image}
+          description={this.state.profile.description}
+          rejectProfile={this.rejectProfile.bind(this)}
+          goToRelations={this.goToRelations.bind(this)}
+          goToProfile={this.goToProfile.bind(this)}
+          events={this.state.events}
+          sendLit={this.sendLit.bind(this)}
+          handleSlideChange={this.handleSlideChange.bind(this)}
+          tokenAmount={this.state.tokenAmount}
+        />
       </div>
       )
   }

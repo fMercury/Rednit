@@ -76,33 +76,38 @@ class MainScreenView extends Component {
               <div className="row text-center">
                 <div className="circle-loader" />{' '}
               </div>
+            ) : this.props.noProfiles ? (
+              <div className="row text-center">
+                <h2>You swiped everyone!</h2>
+              </div>
             ) : (
             <div>
-          <div className="row text-center photos-section">
-            <div className="col-12 text-center">
-              <img src={image} height="400px" width="400px"/>
+              <div className="row text-center photos-section">
+                <div className="col-12 text-center">
+                  <img src={image} height="400px" width="400px"/>
+                </div>
+              </div>
+              <div className="row text-center">
+                <div className="col-12 text-left profile-name">{this.props.name}</div>
+              </div>
+              <div className="row text-center">
+                <div className="col-12 text-left profile-description">{this.props.description}</div>
+              </div>
+              <div className="row">
+                <div className="col-6 text-center">
+                  <button onClick={this.props.rejectProfile}>
+                    <img src={require('../img/no.svg')}/>
+                  </button>
+                </div>
+                <div className="col-6 text-center">
+                  <button onClick={this.openModal}>
+                    <img src={require('../img/yes.svg')}/>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="row text-center">
-            <div className="col-12 text-left profile-name">{this.props.name}</div>
-          </div>
-          <div className="row text-center">
-            <div className="col-12 text-left profile-description">{this.props.description}</div>
-          </div>
-          </div>
           )} </b>
-          <div className="row">
-            <div className="col-6 text-center">
-              <button onClick={this.props.rejectProfile}>
-                <img src={require('../img/no.svg')}/>
-              </button>
-            </div>
-            <div className="col-6 text-center">
-              <button onClick={this.openModal}>
-                <img src={require('../img/yes.svg')}/>
-              </button>
-            </div>
-          </div>
+
         </div>
         <div>
 
