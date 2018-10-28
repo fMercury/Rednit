@@ -56,7 +56,7 @@ class MainScreenView extends Component {
       <div className="main-screen">
 
         <div className="container text-center">
-          <div className="row">
+          <div className="row header-row">
             <div className="col-4 text-center">
               <button onClick={this.props.goToProfile}>
                 <i class="fas fa-1x fa-user"></i>
@@ -72,13 +72,12 @@ class MainScreenView extends Component {
             </div>
           </div>
           <b>
-              {this.props.isLoading ? (
-                <div>
-                  <br />
-                    <div className="circle-loader" />{' '}
-                </div>
-              ) : (
-              <div>
+            {this.props.isLoading ? (
+              <div className="row text-center">
+                <div className="circle-loader" />{' '}
+              </div>
+            ) : (
+            <div>
           <div className="row text-center photos-section">
             <div className="col-12 text-center">
               <img src={image} height="400px" width="400px"/>
