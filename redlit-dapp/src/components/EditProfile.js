@@ -9,27 +9,25 @@ class EditProfile extends Component {
     this.litTokenService = this.props.services.litTokenService;
     this.ensService = this.props.services.ensService;
     this.state = {
-      file: [], 
+      file: '',
       description: '',
       name: '',
-      profile: []
+      profile: {}
     };
 
     this.getProfile();
   }
 
-  async getProfile(){
+  async getProfile() {
     const ensName = await this.ensService.getEnsName(this.identityService.identity.address);
-    var profile = await this.litTokenService.getUserProfile(this.identityService.identity.address);
-    console.log(profile);
-    if (profile === ''){
-      profile = [];
+    let profile = await this.litTokenService.getUserProfile(this.identityService.identity.address);
+    if (profile === '') {
+      profile = {};
       profile.name = ensName;
       profile.description = 'No description given';
       profile.image = 'default';
     }
-    this.setState({ profile: profile })
-    
+    this.setState({ profile: profile });
   }
 
   setView(view) {
@@ -52,12 +50,10 @@ class EditProfile extends Component {
   }
 
   async submitEdits(event) {
+    const {profile, file, name, description} = this.state;
     event.preventDefault();
-    if (this.state.file === []){
-      await this.litTokenService.editProfile(this.state.name, this.state.description);
-    } else {
-      await this.litTokenService.editProfile(this.state.name, this.state.description, this.state.file);
-    }
+    const newProfile =
+    await this.litTokenService.editProfile(profile, {file, name, description});
     this.emitter.emit('setView', 'MainScreen');
   }
 
@@ -65,9 +61,9 @@ class EditProfile extends Component {
     const {file} = this.state;
     return (
       <div>
-        <EditProfileView 
-          setView={this.setView.bind(this)} 
-          submitEdits={this.submitEdits.bind(this)} 
+        <EditProfileView
+          setView={this.setView.bind(this)}
+          submitEdits={this.submitEdits.bind(this)}
           handleFileUpload={this.handleFileUpload.bind(this)}
           identity={this.identityService.identity.name}
           editDescription={this.editDescription.bind(this)}

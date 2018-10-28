@@ -53,17 +53,11 @@ class LitTokenService {
     await this.identityService.execute(message);
   }
 
-  async editProfile(name, description, file='') {
-    console.log("editing")
+  async editProfile(oldProfile, {name, description, file}) {
     const userProfile = {};
-    const oldProfile = this.getUserProfile();
-    if (file !== '') {
-      userProfile.image = await image2base64(file);
-    } else if (oldProfile.image) {
-      userProfile.image = oldProfile.image;
-    }
-    userProfile.description = description;
-    userProfile.name = name;
+    userProfile.image =  file && !! file.length ? await image2base64(file) : oldProfile.image
+    userProfile.description = description || oldProfile.description;
+    userProfile.name = name || oldProfile.name;
     const buffer = new Buffer(JSON.stringify(userProfile));
     await ipfs.add(buffer, async (err, profileHash) => {
       if (err) return console.log(err);
@@ -102,7 +96,7 @@ class LitTokenService {
       }
     }
 
-    if (profileEdit !== '') { 
+    if (profileEdit !== '') {
       let content = await ipfs.cat(profileEdit).catch(err => console.log(err));
       profileEdit = JSON.parse(content.toString('utf8'));
     }
