@@ -53,10 +53,15 @@ class LitTokenService {
     await this.identityService.execute(message);
   }
 
-  async editProfile(name, description, file) {
+  async editProfile(name, description, file='') {
     console.log("editing")
     const userProfile = {};
-    userProfile.image = await image2base64(file);;
+    const oldProfile = this.getUserProfile();
+    if (file !== '') {
+      userProfile.image = await image2base64(file);
+    } else if (oldProfile.image) {
+      userProfile.image = oldProfile.image;
+    }
     userProfile.description = description;
     userProfile.name = name;
     const buffer = new Buffer(JSON.stringify(userProfile));

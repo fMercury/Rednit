@@ -7,11 +7,29 @@ class EditProfile extends Component {
     this.emitter = this.props.services.emitter;
     this.identityService = this.props.services.identityService;
     this.litTokenService = this.props.services.litTokenService;
+    this.ensService = this.props.services.ensService;
     this.state = {
       file: [], 
       description: '',
-      name: '' 
+      name: '',
+      profile: []
     };
+
+    this.getProfile();
+  }
+
+  async getProfile(){
+    const ensName = await this.ensService.getEnsName(this.identityService.identity.address);
+    var profile = await this.litTokenService.getUserProfile(this.identityService.identity.address);
+    console.log(profile);
+    if (profile === ''){
+      profile = [];
+      profile.name = ensName;
+      profile.description = 'No description given';
+      profile.image = 'default';
+    }
+    this.setState({ profile: profile })
+    
   }
 
   setView(view) {
@@ -35,7 +53,11 @@ class EditProfile extends Component {
 
   async submitEdits(event) {
     event.preventDefault();
-    await this.litTokenService.editProfile(this.state.name, this.state.description, this.state.file);
+    if (this.state.file === []){
+      await this.litTokenService.editProfile(this.state.name, this.state.description);
+    } else {
+      await this.litTokenService.editProfile(this.state.name, this.state.description, this.state.file);
+    }
     this.emitter.emit('setView', 'MainScreen');
   }
 
@@ -50,8 +72,9 @@ class EditProfile extends Component {
           identity={this.identityService.identity.name}
           editDescription={this.editDescription.bind(this)}
           editName={this.editName.bind(this)}
-          description="Howdy Do Test Description!"
-          name="Francisco Testname"
+          description={this.state.profile.description}
+          name={this.state.profile.name}
+          image={this.state.profile.image}
         />
 
       </div>

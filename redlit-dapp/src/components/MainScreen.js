@@ -26,6 +26,8 @@ class MainScreen extends Component {
       profile.description = 'No description given';
       profile.image = 'default';
     }
+    if (!profile.image) profile.image = 'default';
+    
     this.setState({ address: profiles[rand], ensName: ensName, profile: profile })
     
   }
