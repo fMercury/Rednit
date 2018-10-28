@@ -3,16 +3,16 @@ import Token from '../../build/Token';
 import {tokenContractAddress} from '../../config/config';
 import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
 import LitToken from '../../build/LitToken';
-import SwarmAPI from 'swarm-api';
 import image2base64 from 'image-to-base64';
+import ipfsAPI from 'ipfs-api';
+
+const ipfs = ipfsAPI('ipfs.infura.io', '5001', {protocol: 'https'})
 
 class LitTokenService {
-  constructor(litTokenContractAddress, identityService, ensService, provider, swarmProvider) {
+  constructor(litTokenContractAddress, identityService, ensService, provider) {
     this.litTokenContractAddress = litTokenContractAddress;
     this.identityService = identityService;
     this.provider = provider;
-    this.swarmProvider = swarmProvider;
-    this.swarm = new SwarmAPI({ gateway: this.swarmProvider });
   }
 
   async getBalance(address) {
@@ -59,13 +59,12 @@ class LitTokenService {
     userProfile.image = await image2base64(file);;
     userProfile.description = description;
     userProfile.name = name;
-    const userProfleJSON = JSON.stringify(userProfile)
-    console.log(userProfleJSON);
-    await this.swarm.uploadRaw(userProfleJSON, async (err, profileHash) => {
-      if (err) console.log(err)
-      console.log(profileHash);
-      await this.executeEditProfile(profileHash);
-    });
+    const buffer = new Buffer(JSON.stringify(userProfile));
+    await ipfs.add(buffer, async (err, profileHash) => {
+      if (err) return console.log(err);
+      console.log(profileHash[0].hash);
+      await this.executeEditProfile(profileHash[0].hash);
+    })
   }
 
   async executeEditProfile(profileHash) {
@@ -99,14 +98,8 @@ class LitTokenService {
     }
 
     if (profileEdit !== '') { 
-      console.log("getting swarm data");
-      await this.swarm.downloadRaw(profileEdit, (err, content) => {
-        if(err) return console.error(err);
-        console.log(profileEdit);
-        console.log(content);
-        profileEdit = JSON.parse(content);
-        console.log(`contents of our test: ${profileEdit}`);
-      });
+      let content = await ipfs.cat(profileEdit).catch(err => console.log(err));
+      profileEdit = JSON.parse(content.toString('utf8'));
     }
 
     return profileEdit;

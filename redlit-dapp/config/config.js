@@ -6,5 +6,4 @@ module.exports = Object.freeze({
   tokenContractAddress: process.env.TOKEN_CONTRACT_ADDRESS,
   litTokenAddress: process.env.REDNIT_TOKEN_CONTRACT_ADDRESS,
   rednitTokenContractAddress: process.env.REDNIT_TOKEN_CONTRACT_ADDRESS,
-  swarmProvider: process.env.SWARM_PROVIDER || 'http://swarm-gateways.net'
 });
