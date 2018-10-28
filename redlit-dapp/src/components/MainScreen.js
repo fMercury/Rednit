@@ -30,7 +30,7 @@ class MainScreen extends Component {
     if (!profile.image) profile.image = 'default';
 
     this.setState({ address: profiles[rand], ensName: ensName, profile: profile, isLoading: false})
-    
+
   }
 
   setView(view) {
@@ -52,7 +52,7 @@ class MainScreen extends Component {
   }
 
   goToRelations() {
-    this.setView("Relation");
+    this.setView("Relations");
   }
 
   async rejectProfile() {
@@ -62,7 +62,7 @@ class MainScreen extends Component {
   async update() {
     // const {tokenService} = await this.props.services;
     // const {identityService} = this.props.services;
-    // const {address} = identityService.identity; 
+    // const {address} = identityService.identity;
     // setTimeout(this.update.bind(this), 1000);
   }
 

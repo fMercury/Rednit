@@ -10,6 +10,7 @@ import Backup from './Backup';
 import Trusted from './Trusted';
 import RecoverAccount from './RecoverAccount';
 import EditProfile from './EditProfile';
+import Relations from './Relations';
 import Relation from './Relation';
 import Swap from './Swap';
 import PropTypes from 'prop-types';
@@ -73,8 +74,10 @@ class ContentContainer extends Component {
 
     } else if (this.state.view === 'Profile') {
       return <Profile services={services} setView={this.setView.bind(this)}/>;
+    } else if (this.state.view === 'Relations') {
+      return <Relations services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Relation') {
-      return <Relation services={services} setView={this.setView.bind(this)}/>;
+     return <Relation services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Swap') {
       return <Swap services={services} setView={this.setView.bind(this)}/>;
     }

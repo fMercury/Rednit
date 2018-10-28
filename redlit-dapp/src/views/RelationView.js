@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const RelationView  = (props) => (
       <div className="subview">
         <div className="container">
-          <h1 className="main-title">Matches</h1>
+          <h1 className="main-title">Relation wow</h1>
           <p className="relation-text">
-            Your Matches!!
+            Your Relation!
           </p>
 
         </div>
