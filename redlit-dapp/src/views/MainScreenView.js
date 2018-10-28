@@ -116,8 +116,8 @@ class MainScreenView extends Component {
           <h2 ref={subtitle => this.subtitle = subtitle}>Spark</h2>
           <div className="row  text-center">
             <form>
-              <input type="number" min="1" max="100" />
-              <button onClick={this.openModal}><img src={require('../img/fire.png')} width=""/></button>
+              <input type="range" min="1" max="100" value={this.props.tokenAmount} onChange={this.props.handleSlideChange} />
+              <button onClick={this.props.sendLit}><img src={require('../img/fire.png')} width=""/></button>
             </form>
           </div>
           <div className="row text-center">
@@ -134,10 +134,13 @@ MainScreenView.propTypes = {
   events: PropTypes.array,
   goToProfile: PropTypes.func,
   rejectProfile: PropTypes.func,
+  handleSlideChange: PropTypes.func,
+  sendLit: PropTypes.func,
   name: PropTypes.string,
   image: PropTypes.string,
   description: PropTypes.string,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  tokenAmount: PropTypes.string
 };
 
 export default MainScreenView;

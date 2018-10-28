@@ -79,6 +79,31 @@ class LitTokenService {
     await this.identityService.execute(message);
   }
 
+  async getRelationChannels(userAddress=this.identityService.identity.address) {
+    const relationChannelCreatedEvent = new Interface(LitToken.interface).events.RelationChannelCreated;
+    var relations = [];
+    const filter = {
+      fromBlock: 0,
+      address: this.litTokenContractAddress,
+      topics: [relationChannelCreatedEvent.topics]
+    };
+    const events = await this.provider.getLogs(filter);
+    for (const event of events) {
+      const eventArguments = relationChannelCreatedEvent.parse(relationChannelCreatedEvent.topics, event.data);
+      if (eventArguments.personA === userAddress || eventArguments.personB === userAddress) {
+        var relation = {};
+        if (eventArguments.personA === userAddress) {
+          relation.lover = eventArguments.personB;
+        } else {
+          relation.lover = eventArguments.personA;
+        }
+        relation.contract = eventArguments.relationChannel;
+        relations.push(relation);
+      }
+    }
+
+    return relations;
+  }
 
   async getUserProfile(userAddress=this.identityService.identity.address) {
     const profileEditEvent = new Interface(LitToken.interface).events.ProfileEdit;
@@ -118,6 +143,22 @@ class LitTokenService {
       registeredUsers.push(eventArguments.user);
     }
     return registeredUsers;
+  }
+
+  async sendLit(to, tokens) {
+    console.log(to, tokens);
+    const {data} = new Interface(LitToken.interface).functions.submitRequest('0xc88Be04c809856B75E3DfE19eB4dCf0a3B15317a', tokens);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    };
+    console.log('send tx');
+    const tx = await this.identityService.execute(message).catch(console.log);
+    console.log(tx);
   }
 }
 export default LitTokenService;

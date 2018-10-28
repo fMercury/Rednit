@@ -29,7 +29,7 @@ class MainScreen extends Component {
     }
     if (!profile.image) profile.image = 'default';
 
-    this.setState({ address: profiles[rand], ensName: ensName, profile: profile, isLoading: false})
+    this.setState({ address: profiles[rand], ensName: ensName, profile: profile, isLoading: false, tokenAmount: 1})
 
   }
 
@@ -62,6 +62,17 @@ class MainScreen extends Component {
     this.getProfile();
   }
 
+  async sendLit() {
+    const {tokenAmount, address} = this.state;
+    console.log(`sending ${tokenAmount} Lit to ${address}`);
+    await this.litTokenService.sendLit(address, tokenAmount);
+    this.getProfile();
+  }
+
+  async handleSlideChange(event) {
+    this.setState({tokenAmount: event.target.value});
+  }
+
   async update() {
     // const {tokenService} = await this.props.services;
     // const {identityService} = this.props.services;
@@ -73,7 +84,7 @@ class MainScreen extends Component {
     return (
       <div>
         <RequestsBadge setView={this.setView.bind(this)} services={this.props.services}/>
-        <MainScreenView isLoading={this.state.isLoading} name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} />
+        <MainScreenView isLoading={this.state.isLoading} name={this.state.profile.name} image={this.state.profile.image} description={this.state.profile.description} rejectProfile={this.rejectProfile.bind(this)} goToRelations={this.goToRelations.bind(this)} goToProfile={this.goToProfile.bind(this)} events={this.state.events} sendLit={this.sendLit.bind(this)} handleSlideChange={this.handleSlideChange.bind(this)} tokenAmount={this.state.tokenAmount}/>
       </div>
       )
   }
