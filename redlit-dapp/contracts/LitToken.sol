@@ -43,7 +43,7 @@ contract LitToken is StandardToken {
   }
 
   function submitRequest(address to, uint256 tokens) public {
-    _transfer(msg.sender, address(0), tokens);
+    /* _transfer(msg.sender, address(0), tokens); */
     request[msg.sender][to] = tokens;
     emit ConnectionRequest(msg.sender, to, tokens);
   }
@@ -101,7 +101,7 @@ contract LitToken is StandardToken {
   */
   function _transfer(address from, address to, uint256 value) internal {
     require(value <= balances[from]);
-    require(to != address(0));
+    /* require(to != address(0)); */
 
     balances[from] = balances[from].sub(value);
     balances[to] = balances[to].add(value);

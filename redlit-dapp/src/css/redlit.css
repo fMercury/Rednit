@@ -47,11 +47,26 @@
 
 .match-row {
   border-radius: 3px;
-  background-color: grey;
+  background-color: #F8F8F8;
   margin-bottom: 3px;
   padding: 2px 4px;
 }
 
+.relations-title {
+  margin: 10px 0px;
+  font-size: 30px;
+  color: #9D9D9D;
+}
+
 .header {
   margin-bottom: 5px;
+}
+
+.request-button{
+  font-weight: bold;
+  color: red;
+  padding: 0px 5px;
+  margin: 0px 5px;
+  border-radius: 3px;
+  border: 2px solid black;
 }

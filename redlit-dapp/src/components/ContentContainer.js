@@ -71,7 +71,6 @@ class ContentContainer extends Component {
       return <RecoverAccount services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'EditProfile') {
       return <EditProfile services={services} setView={this.setView.bind(this)}/>;
-
     } else if (this.state.view === 'Profile') {
       return <Profile services={services} setView={this.setView.bind(this)}/>;
     } else if (this.state.view === 'Relations') {

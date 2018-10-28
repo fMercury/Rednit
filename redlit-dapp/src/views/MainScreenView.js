@@ -42,7 +42,6 @@ class MainScreenView extends Component {
     this.setState({modalIsOpen: false});
   }
 
-
   render() {
 
     var image = this.props.image;
@@ -51,6 +50,8 @@ class MainScreenView extends Component {
     } else {
       image = " data:image/jpeg;base64," + image;
     }
+
+    console.log(this.props)
 
     return (
       <div className="main-screen">
@@ -76,33 +77,38 @@ class MainScreenView extends Component {
               <div className="row text-center">
                 <div className="circle-loader" />{' '}
               </div>
+            ) : this.props.noProfiles ? (
+              <div className="row text-center">
+                <h2>You swiped everyone!</h2>
+              </div>
             ) : (
             <div>
-          <div className="row text-center photos-section">
-            <div className="col-12 text-center">
-              <img src={image} height="400px" width="400px"/>
+              <div className="row text-center photos-section">
+                <div className="col-12 text-center">
+                  <img src={image} height="400px" width="400px"/>
+                </div>
+              </div>
+              <div className="row text-center">
+                <div className="col-12 text-left profile-name">{this.props.name}</div>
+              </div>
+              <div className="row text-center">
+                <div className="col-12 text-left profile-description">{this.props.description}</div>
+              </div>
+              <div className="row">
+                <div className="col-6 text-center">
+                  <button onClick={this.props.rejectProfile}>
+                    <img src={require('../img/no.svg')}/>
+                  </button>
+                </div>
+                <div className="col-6 text-center">
+                  <button onClick={this.openModal}>
+                    <img src={require('../img/yes.svg')}/>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="row text-center">
-            <div className="col-12 text-left profile-name">{this.props.name}</div>
-          </div>
-          <div className="row text-center">
-            <div className="col-12 text-left profile-description">{this.props.description}</div>
-          </div>
-          </div>
           )} </b>
-          <div className="row">
-            <div className="col-6 text-center">
-              <button onClick={this.props.rejectProfile}>
-                <img src={require('../img/no.svg')}/>
-              </button>
-            </div>
-            <div className="col-6 text-center">
-              <button onClick={this.openModal}>
-                <img src={require('../img/yes.svg')}/>
-              </button>
-            </div>
-          </div>
+
         </div>
         <div>
 
@@ -117,7 +123,7 @@ class MainScreenView extends Component {
           <div className="row  text-center">
             <form>
               <input type="range" min="1" max="100" value={this.props.tokenAmount} onChange={this.props.handleSlideChange} />
-              <button onClick={this.props.sendLit}><img src={require('../img/fire.png')} width=""/></button>
+              <button onClick={this.props.submitRequest}><img src={require('../img/fire.png')} width=""/></button>
             </form>
           </div>
           <div className="row text-center">
@@ -135,7 +141,7 @@ MainScreenView.propTypes = {
   goToProfile: PropTypes.func,
   rejectProfile: PropTypes.func,
   handleSlideChange: PropTypes.func,
-  sendLit: PropTypes.func,
+  submitRequest: PropTypes.func,
   name: PropTypes.string,
   image: PropTypes.string,
   description: PropTypes.string,
