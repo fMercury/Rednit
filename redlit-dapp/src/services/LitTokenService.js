@@ -47,12 +47,20 @@ class LitTokenService {
     return await this.litTokenContract.balance(address);
   }
 
-  async sendRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async sendRelationRequest(toAddress, numTokens) {
+    return await this.litTokenContract.submitRequest(toAddress, numTokens);
   }
 
-  async acceptRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async acceptRelationRequest(fromAddress, numTokens) {
+    return await this.litTokenContract.acceptRequest(fromAddress, numTokens);
+  }
+
+  async senderCancelRequest(toAddress) {
+    return await this.litTokenContract.cancelRequestSender(toAddress);
+  }
+
+  async receiverCancelRequest(fromAddress) {
+    return await this.litTokenContract.cancelRequestReceiver(fromAddress);
   }
 
   async register() {
@@ -118,6 +126,36 @@ class LitTokenService {
     }
 
     return relations;
+  }
+
+  async getPendingRequests(userAddress=this.identityService.identity.address) {
+    const connectionRequestEvent = new Interface(LitToken.interface).events.ConnectionRequest;
+    var pendingRequests = [];
+    const filter = {
+      fromBlock: 0,
+      address: this.litTokenContractAddress,
+      topics: [connectionRequestEvent.topics]
+    };
+    const events = await this.provider.getLogs(filter);
+    for (const event of events) {
+      const eventArguments = connectionRequestEvent.parse(connectionRequestEvent.topics, event.data);
+      if (userAddress === eventArguments.receiver) {
+        this.litTokenContract = new ethers.Contract(
+          this.litTokenContractAddress,
+          LitToken.interface,
+          this.provider
+        );
+        let numTokens = await relationContract.request[eventArguments.sender][userAddress];
+        if (numTokens > 0) {
+          var aPendingRequest = {};
+          aPendingRequest.sender = eventArguments.sender;
+          aPendingRequest.receiver = eventArguments.receiver;
+          aPendingRequest.tokens = eventArguments.tokens;
+          pendingRequests.push(aPendingRequest);
+        }
+      }
+    }
+    return pendingRequests;
   }
 
   async getUserProfile(userAddress=this.identityService.identity.address) {

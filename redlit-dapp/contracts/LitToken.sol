@@ -13,6 +13,7 @@ contract LitToken is StandardToken {
 
   event ProfileEdit(address user, string profileHash);
   event RelationChannelCreated(address relationChannel, address personA, address personB);
+  event ConnectionRequest(address sender, address receiver, uint256 tokens);
   event RegisterUser(address user);
 
   struct Request {
@@ -44,6 +45,7 @@ contract LitToken is StandardToken {
   function submitRequest(address to, uint256 tokens) public {
     _transfer(msg.sender, address(0), tokens);
     request[msg.sender][to] = tokens;
+    emit ConnectionRequest(msg.sender, to, tokens);
   }
 
   function cancelRequestReceiver(address from) public {
