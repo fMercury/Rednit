@@ -10,7 +10,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      identity: ''
+      identity: '',
+      is18: false
     };
     this.litTokenService = this.props.services.litTokenService;
     this.identityService = this.props.services.identityService;
@@ -36,16 +37,26 @@ class Login extends Component {
   }
 
   async onNextClick(identity) {
-    const {emitter} = this.props.services;
-    if (await this.identityExist(identity)) {
-      emitter.emit('setView', 'ApproveConnection');
-      const label = await this.getLabel();
-      await this.identityService.connect(label);
+    if (this.state.is18) {
+      const {emitter} = this.props.services;
+      if (await this.identityExist(identity)) {
+        emitter.emit('setView', 'ApproveConnection');
+        const label = await this.getLabel();
+        await this.identityService.connect(label);
+      } else {
+        emitter.emit('setView', 'CreatingID');
+        await this.identityService.createIdentity(identity);
+        await this.litTokenService.register();
+        emitter.emit('setView', 'MainScreen');
+      }
+    }
+  }
+
+  toggle() {
+    if (this.state.is18) {
+      this.setState({ is18: false });
     } else {
-      emitter.emit('setView', 'CreatingID');
-      await this.identityService.createIdentity(identity);
-      await this.litTokenService.register();
-      emitter.emit('setView', 'MainScreen');
+      this.setState({ is18: true })
     }
   }
 
@@ -73,6 +84,8 @@ class Login extends Component {
             identityExist = {this.identityExist.bind(this)}
             identitySelectionService={this.props.services.identitySelectionService}
           />
+          <input type="checkbox" onChange={(event) => this.toggle()}/>
+          <label>: I am of or over the age of 18</label>
         </div>
       </div>
     );
