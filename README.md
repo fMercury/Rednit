@@ -10,6 +10,9 @@ As to much the relationship increases, the spark grows.
 If the relationship is over, the channel will be closed and the corresponding balance will be sent to each user.
 The information available to the users is based on pictures uploaded for the user and storage in SWARM, a short bio that users write themselves.
 
+You can see our mockup in:
+https://projects.invisionapp.com/share/5POT8WJVSMY#/screens/328080420
+
 ## Getting Started
 
 ### Prerequisites
