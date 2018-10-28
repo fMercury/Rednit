@@ -59,7 +59,7 @@ class MainScreenView extends Component {
           <div className="row header-row">
             <div className="col-4 text-center">
               <button onClick={this.props.goToProfile}>
-                <i class="fas fa-1x fa-user"></i>
+                <i className="fas fa-1x fa-user"></i>
               </button>
             </div>
             <div className="col-4 text-center">
@@ -67,7 +67,7 @@ class MainScreenView extends Component {
             </div>
             <div className="col-4 text-center">
               <button onClick={this.props.goToRelations}>
-                <i class="fas fa-1x fa-comments"></i>
+                <i className="fas fa-1x fa-comments"></i>
               </button>
             </div>
           </div>

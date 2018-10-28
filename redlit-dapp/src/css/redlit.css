@@ -44,3 +44,14 @@
 .header-row {
   margin-top: 20px;
 }
+
+.match-row {
+  border-radius: 3px;
+  background-color: grey;
+  margin-bottom: 3px;
+  padding: 2px 4px;
+}
+
+.header {
+  margin-bottom: 5px;
+}

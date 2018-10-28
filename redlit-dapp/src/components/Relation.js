@@ -12,7 +12,7 @@ import SettingsAccordion from './SettingsAccordion';
 import RelationView from '../views/RelationView';
 import PropTypes from 'prop-types';
 
-class Account extends Component {
+class Relation extends Component {
   constructor(props) {
     super(props);
     this.emitter = this.props.services.emitter;
@@ -36,8 +36,8 @@ class Account extends Component {
     );
   }
 }
-Account.propTypes = {
+Relation.propTypes = {
   services: PropTypes.object
 };
 
-export default Account;
+export default Relation;

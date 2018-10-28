@@ -38,7 +38,6 @@ class MainScreen extends Component {
     emitter.emit('setView', view);
   }
 
-
   componentDidMount() {
     this.timeout = setTimeout(this.update.bind(this), 0);
   }
@@ -53,6 +52,10 @@ class MainScreen extends Component {
 
   goToRelations() {
     this.setView("Relations");
+  }
+
+  goToRelation() {
+    this.setView("Relation");
   }
 
   async rejectProfile() {
