@@ -119,5 +119,21 @@ class LitTokenService {
     }
     return registeredUsers;
   }
+
+  async sendLit(to, tokens) {
+    console.log(to, tokens);
+    const {data} = new Interface(LitToken.interface).functions.submitRequest('0xc88Be04c809856B75E3DfE19eB4dCf0a3B15317a', tokens);
+    const message = {
+      to: this.litTokenContractAddress,
+      from: this.identityService.identity.address,
+      value: 0,
+      data,
+      gasToken: tokenContractAddress,
+      ...DEFAULT_PAYMENT_OPTIONS
+    };
+    console.log('send tx');
+    const tx = await this.identityService.execute(message).catch(console.log);
+    console.log(tx);
+  }
 }
 export default LitTokenService;
