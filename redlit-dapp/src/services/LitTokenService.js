@@ -47,12 +47,20 @@ class LitTokenService {
     return await this.litTokenContract.balance(address);
   }
 
-  async sendRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async sendRelationRequest(toAddress, numTokens) {
+    return await this.litTokenContract.submitRequest(toAddress, numTokens);
   }
 
-  async acceptRelationRequest(address) {
-    return await this.litTokenContract.balance(address);
+  async acceptRelationRequest(fromAddress, numTokens) {
+    return await this.litTokenContract.acceptRequest(fromAddress, numTokens);
+  }
+
+  async senderCancelRequest(toAddress) {
+    return await this.litTokenContract.cancelRequestSender(toAddress);
+  }
+
+  async receiverCancelRequest(fromAddress) {
+    return await this.litTokenContract.cancelRequestReceiver(fromAddress);
   }
 
   async register() {
