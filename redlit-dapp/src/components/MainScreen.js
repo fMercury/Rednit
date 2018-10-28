@@ -34,6 +34,9 @@ class MainScreen extends Component {
       const ensName = await this.ensService.getEnsName(profiles[rand]);
       var profile = await this.litTokenService.getUserProfile(profiles[rand]);
       profile.address = profiles[rand];
+      if (!profile.image) {
+        profile.image = 'default';
+      }
     }
     console.log(profile)
     this.setState({
