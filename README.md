@@ -1,79 +1,65 @@
-[![Build Status](https://travis-ci.com/EthWorks/UniversalLoginSDK.svg?branch=master)](https://travis-ci.com/EthWorks/UniversalLoginSDK)
+# Project Title
 
-# Ethereum IdentitySDK
+Redlit is a dating DAPP on the Ethereum network that allows users to stake the relationships with LIT tokens. 
 
-Ethereum Identity SDK is composed of smart contracts, a js lib, and a relayer that help build applications using ERC [#725](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-725.md), [#735](https://github.com/ethereum/EIPs/issues/735), [#1077](https://github.com/ethereum/EIPs/pull/1077) and [#1078](https://github.com/ethereum/EIPs/pull/1078).
+## Summary
+REDLIT is a decentralized location-based social search mobile app that allows users to like or dislike other users.
+The app allows users to start the spark of the relationship (a communication channel) by sending a token amount that the user offers.
+In adition, the user who receives a request and decides to accept the proposal can also increase the spark of the relationship (offer more token).
+As to much the relationship increases, the spark grows.
+If the relationship is over, the channel will be closed and the corresponding balance will be sent to each user.
+The information available to the users is based on pictures uploaded for the user and storage in SWARM, a short bio that users write themselves.
 
-This is a work in progress. Expect breaking changes. The code has not been audited and therefore can not be considered secure.
-Planned functionality for first release include:
+## Getting Started
 
-- Creating and managing identities
-- Multi-factor authentication
-- Universal login
-- Ether less transactions via relayer
+### Prerequisites
 
-### Structure
-This repository is organised as monorepo.
+You need lates version of [yarn](https://yarnpkg.com/) installed.
 
-- [Contracts](https://github.com/EthWorks/UniversalLoginSDK/tree/master/universal-login-contracts) - all contracts used in this project
-- [Example](https://github.com/EthWorks/UniversalLoginSDK/blob/master/universal-login-example/README.md) - example app, which shows how to use SDK
-- [Relayer](https://github.com/EthWorks/UniversalLoginSDK/blob/master/universal-login-relayer/README.md) - allows to interact with blockchain
-- [SDK](https://github.com/EthWorks/UniversalLoginSDK/blob/master/universal-login-sdk/README.md) - easy way to communicate with relayer by http protocol
+### Installing & build
 
-
-## Quick example start
-
-To install dependencies and build projects run following commands from the main project directory:
+To install dependencies and build the project run following commands from the main project directory:
 
 ```sh
 yarn && yarn build
 ```
 
-To run example:
+## Running the app
+
+Join redlit dapp directory and run the dapp.
 
 ```sh
-cd universal-login-example
+cd redlit-dapp
 yarn dev:start
 ```
-[manual option](https://github.com/EthWorks/UniversalLoginSDK/blob/master/universal-login-example/README.md)
 
-## Tutorial & boilerplate
-A simple boilerplate and tutorial can be found [here](https://github.com/EthWorks/UniversalLoginSDK/blob/master/Tutorial.md)
+## Built With
+
+* [React](https://reactjs.org/)
+* [Bootstrap](https://getbootstrap.com/) 
+* [Universal Login](https://github.com/EthWorks/UniversalLoginSDK) 
 
 ## Contributing
 
-Contributions are always welcome, no matter how large or small. Before contributing, please read the [code of conduct](https://github.com/EthWorks/UniversalLoginSDK/blob/master/CODE_OF_CONDUCT.md) and [contribution policy](https://github.com/EthWorks/UniversalLoginSDK/blob/master/CONTRIBUTION.md).
 
-Before you issue pull request:
-* Make sure all tests and linters pass.
-* Make sure you have test coverage for any new features.
+## Versioning
 
 
-## Running linting/tests
+## Authors
 
-You can run lint via:
+*  [Franco](https://github.com/fMercury)
+*  [Kyle](https://github.com/Kyrrui)
+*  [Lili](https://www.lililashka.com/)
+*  [Augusto](https://github.com/AugustoL)
+*  [Matias](https://github.com/MatiasOS)
 
-```sh
-./script/lint.sh
-```
-
-You can run tests:
-
-```sh
-./scripts/test.sh
-```
-
-You can ran full clean:
-```sh
-./scripts/clean.sh
-```
-
-And you can emulate full CI process by:
-```sh
-yarn
-./scripts/travis.sh
-```
 
 ## License
 
-Universal Login SDK is released under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
