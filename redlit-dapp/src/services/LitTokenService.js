@@ -3,6 +3,7 @@ import Token from '../../build/Token';
 import {tokenContractAddress} from '../../config/config';
 import DEFAULT_PAYMENT_OPTIONS from '../../config/defaultPaymentOptions';
 import LitToken from '../../build/LitToken';
+import RelationChannel from '../../build/RelationChannel';
 import image2base64 from 'image-to-base64';
 import ipfsAPI from 'ipfs-api';
 
@@ -22,6 +23,20 @@ class LitTokenService {
       this.provider
     );
     return await this.litTokenContract.balances(address);
+  };
+
+  async getStake(relationAddress, userAddress=this.identityService.identity.address) {
+    relationContract = new ethers.Contract(
+      relationAddress,
+      RelationChannel.interface,
+      this.provider
+    );
+    let loverOne = await relationContract.lover_one;
+    if (userAddress === loverOne) {
+      return await relationContract.lover_one_balance;
+    } else {
+      return await relationContract.lover_two_balance;
+    }
   };
 
   async sendToRelation(address) {
